@@ -1,0 +1,63 @@
+<html>
+<head>
+  <title>Signup!</title>
+  <link rel="stylesheet" href="../sign-up/sign-up.component.css">
+</head>
+
+<body>
+  <img src="../pickawood-gf8e6XvG_3E-unsplash.jpg" class="img">
+  <div class="center">
+    <h1>Signup</h1>
+    <form method="post" class="col s12 white" #userRegistrationForm="ngForm"
+      (ngSubmit)="OnSubmit(userRegistrationForm)">
+      <div class="txt_field">
+        <input class="validate" type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" required
+          minlength="3">
+        <span></span>
+        <label>FirstName</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" required
+          minlength="1">
+        <span></span>
+        <label>LastName</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required
+          minlength="3">
+        <span></span>
+        <label>Email</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" class="validate" type="password" name="Password" #Password="ngModel"
+          [(ngModel)]="user.Password" required minlength="3">
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="txt_field">
+        <input class="validate" type="text" name="MobileNumber" #MobileNumber="ngModel" [(ngModel)]="user.MobileNumber"
+          required minlength="3">
+        <span></span>
+        <label>MobileNumber</label>
+      </div>
+      <select class="form-select" aria-label="Default select example" name="SecurityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="user.SecurityQuestion">
+        <option value="Which City You Have Born?">Which City You Have Born?</option>
+         <option value="What is your First Mobile?">What is your First Mobile?</option>
+         <option value="What is Your First Pet Name?">What is Your First Pet Name?</option>
+       </select>
+       <div class="txt_field">
+         <input class="validate" type="text" name="SecurityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="user.SecurityAnswer"
+           required minlength="3">
+         <span></span>
+         <label>Type Your Answer : Remember your Answer</label>
+       </div>
+      <input type="submit" value="Signup" href="../home-page/home-page.component.html">
+      <div class="signup_link">
+        Already a member? <a routerLink="/login">SignIn</a><br /><a routerLink="/home">Skip</a>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>
