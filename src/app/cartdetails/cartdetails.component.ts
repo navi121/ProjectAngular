@@ -11,46 +11,42 @@ import { UserService } from '../shared/user.service';
 export class CartdetailsComponent implements OnInit {
   items = this.userService.getItems();
   clear = this.userService.clearCart();
-  public cartItems : any=[];
-  cartTotal=0;
+  public cartItems: any = [];
+  cartTotal = 0;
+  
   constructor(public userService: UserService) { }
-  
-  
- 
+
   ngOnInit(): void {
-    
+
   }
-  plus(getCart : CartItem)
-  {
-    var n=Number(getCart.quantity);
+  plus(getCart: CartItem) {
+    var n = Number(getCart.quantity);
     n++;
-    getCart.quantity=String(n);
-    var finalp=Number(getCart.price)*n;
-    getCart.total=String(finalp);
+    getCart.quantity = String(n);
+    var finalp = Number(getCart.price) * n;
+    getCart.total = String(finalp);
     this.cartItems.push({
       productName: getCart.productName,
       qty: 1,
       price: getCart.price
     })
     this.cartTotal = 0
-    this.cartItems.forEach((item : any) => {
+    this.cartItems.forEach((item: any) => {
       this.cartTotal += (item.qty * item.price)
     })
   }
-  minus(getCart : CartItem)
-  { 
-    var n=Number(getCart.quantity);
-    if(n!=0){
-    n--;
-    getCart.quantity=String(n);
-    var finalp=Number(getCart.price);
-    finalp=finalp*n;
-    getCart.total=String(finalp);
-    this.cartTotal-=Number(getCart.price);
-    if(n==0){
-    this.cartItems=[];
+  minus(getCart: CartItem) {
+    var n = Number(getCart.quantity);
+    if (n != 0) {
+      n--;
+      getCart.quantity = String(n);
+      var finalp = Number(getCart.price);
+      finalp = finalp * n;
+      getCart.total = String(finalp);
+      this.cartTotal -= Number(getCart.price);
+      if (n == 0) {
+        this.cartItems = [];
+      }
+    }
   }
-  }
-}
-
 }

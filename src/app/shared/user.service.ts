@@ -33,7 +33,7 @@ export class UserService {
     }
     localStorage.setItem('loggedUser', login.Email);
     this.isAuthenticated = true;
-    return this.http.post(this.rootUrl + '/Login', body);
+    return this.http.post(this.rootUrl + '/Login/UserLogin', body);
   }
   public logOut() {
     sessionStorage.removeItem('Email');
@@ -66,7 +66,7 @@ export class UserService {
       SecurityAnswer: user.SecurityAnswer,
       SecurityQuestion: user.SecurityQuestion
     }
-    return this.http.post(this.rootUrl + '/AddUser', body);
+    return this.http.post(this.rootUrl + '/SignUp/AddUser', body);
   }
 
   public addproduct(additem: AddItem) {
@@ -88,7 +88,7 @@ export class UserService {
     return this.http.post(this.rootUrl + '/Image/' + id, formData);
   }
   public getdetails() {
-    this.http.get(this.rootUrl + '/AddProduct').toPromise().then(res => this.list = res as AddItem[]);
+    this.http.get(this.rootUrl + '/GetProducts').toPromise().then(res => this.list = res as AddItem[]);
   }
   public getImage() {
     this.http.get(this.rootUrl + '/ImageUpload').toPromise().then(res => this.imglist = res as Img[]);
@@ -116,9 +116,9 @@ export class UserService {
   public adminLogin(admin: Admin): Observable<any> {
     const body: Admin = {
       Password: admin.Password,
-      Admin: admin.Admin
+      Email: admin.Email
     }
-    return this.http.post(this.rootUrl + '/AdminLogin', body);
+    return this.http.post(this.rootUrl + '/Login/AdminLogin', body);
   }
   public c(product: CartItem) {
     // const body: CartItem={

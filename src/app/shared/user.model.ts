@@ -41,7 +41,7 @@ export class Pass{
     SecurityQuestion: string;
 }
 export class Admin{
-    Admin: string;
+    Email: string;
     Password: string;
 }
 export class Search{

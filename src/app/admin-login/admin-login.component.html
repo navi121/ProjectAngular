@@ -4,7 +4,7 @@
     <h1>Admin Login</h1>
     <form method="post" class="col s12 white" #log="ngForm" (ngSubmit)="OnSubmit(log)">
         <div class="txt_field">
-            <input class="validate" type="text" name="Admin" #Admin="ngModel" [(ngModel)]="admin.Admin" required
+            <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="admin.Email" required
                 minlength="3">
             <span></span>
             <label>Email</label>

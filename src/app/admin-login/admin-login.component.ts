@@ -23,7 +23,7 @@ export class AdminLoginComponent implements OnInit {
     if (form != null)
       form.reset();
     this.admin = {
-      Admin: '',
+      Email: '',
       Password: '',
     }
   }
