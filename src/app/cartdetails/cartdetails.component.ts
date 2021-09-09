@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IndexedAccessType } from 'typescript';
+import { CartServiceService } from '../shared/cart-service.service';
 import { AddItem, CartItem } from '../shared/user.model';
-import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-cartdetails',
@@ -9,16 +9,19 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./cartdetails.component.css']
 })
 export class CartdetailsComponent implements OnInit {
-  items = this.userService.getItems();
-  clear = this.userService.clearCart();
   public cartItems: any = [];
   cartTotal = 0;
   
-  constructor(public userService: UserService) { }
+  public constructor(public cartService: CartServiceService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
 
   }
+
+  public clear(){
+    this.cartService.clearCart();
+  }
+
   plus(getCart: CartItem) {
     var n = Number(getCart.quantity);
     n++;
@@ -35,6 +38,7 @@ export class CartdetailsComponent implements OnInit {
       this.cartTotal += (item.qty * item.price)
     })
   }
+
   minus(getCart: CartItem) {
     var n = Number(getCart.quantity);
     if (n != 0) {
@@ -48,5 +52,12 @@ export class CartdetailsComponent implements OnInit {
         this.cartItems = [];
       }
     }
+  }
+
+  public savecart(getCart : CartItem){
+    this.cartService.SaveCart(getCart)
+    .subscribe(
+      res => {
+      });
   }
 }

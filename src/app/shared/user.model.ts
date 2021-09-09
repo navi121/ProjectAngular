@@ -35,6 +35,7 @@ export class Reset{
     Email: string;
 }
 export class Pass{
+    ConfirmPassword: string;
     Password: string;
     MobileNumber:string;
     SecurityAnswer:string;

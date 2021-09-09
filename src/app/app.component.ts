@@ -7,7 +7,7 @@ import { UserService } from './shared/user.service';
 })
 export class AppComponent {
   title = 'Angular';
-  constructor(private userService: UserService){}
+  constructor(){}
   public slides = [
     {
       src: 'https://www.infragistics.com/angular-demos/assets/images/carousel/ignite-ui-angular-indigo-design.png'

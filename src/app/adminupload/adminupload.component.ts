@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddItem } from '../shared/user.model';
 import { NgForm } from '@angular/forms';
-import { UserService } from '../shared/user.service';
-import { Router } from '@angular/router';
+import { DashBoardService } from '../shared/dash-board.service';
 
 @Component({
   selector: 'app-adminupload',
@@ -12,41 +11,29 @@ import { Router } from '@angular/router';
 export class AdminuploadComponent implements OnInit {
   public additem: AddItem;
   public files: File;
-  constructor(private userService: UserService,
-    public readonly router: Router) { }
+  public constructor(private dashBoardService: DashBoardService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.resetForm();
   }
+
   public imgUpload(event: any) {
     this.files = event.target.files[0];
   }
+  
   public resetForm(form?: NgForm) {
     if (form != null)
-      form.reset();
-    this.additem = {
-      productName: '',
-      productDescription: '',
-      price: '',
-      size: '',
-      image: '',
-      quantity: '',
-      total: '',
-      category: ''
-    }
+      form.reset;
   }
+
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.userService.addproduct(form.value)
-      .subscribe((response:any) => {
-        this.userService.uploadImages(response, this.files)
-        .subscribe(()=>{
-          this.resetForm(form);
-        })
-            //this.router.navigateByUrl('home');
-            
+    this.additem=form.value;
+    this.dashBoardService.addproduct(form.value)
+      .subscribe((response: any) => {
+        this.dashBoardService.uploadImages(response, this.files)
+          .subscribe(() => {
+            this.resetForm(form);
+          })
       });
-    // 
-    //   .subscribe(() => {
-    //   });
   }
 }

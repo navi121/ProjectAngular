@@ -10,33 +10,39 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  user: User;
-
-  constructor(private userService : UserService,
+  public user: User;
+  public errorMessage: boolean = false;
+  public constructor(private userService: UserService,
     public readonly router: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.resetForm();
   }
-resetForm(form ?:NgForm){
-  if(form !=null)
-  form.reset();
-  this.user={
-    MobileNumber:'',
-    Password:'',
-    Email:'',
-    FirstName:'',
-    LastName:'',
-    SecurityAnswer:'',
-    SecurityQuestion:''
+  public resetForm(form?: NgForm) {
+    if (form != null)
+      form.reset();
+    this.user = {
+      MobileNumber: '',
+      Password: '',
+      Email: '',
+      FirstName: '',
+      LastName: '',
+      SecurityAnswer: '',
+      SecurityQuestion: ''
+    }
   }
-}
 
-public async OnSubmit(form: NgForm): Promise<void> {
-  this.userService.registerUser(form.value)
-  .subscribe(()=>{
-   this.router.navigateByUrl('login');
-  this.resetForm(form);
-  });
-}
+  public async OnSubmit(form: NgForm): Promise<void> {
+    this.user=form.value;
+    try {
+      await this.userService.registerUser(form.value).toPromise();
+      this.router.navigateByUrl('login');
+      this.resetForm(form);
+    }
+    catch (errorResponse) {
+      if (errorResponse === 400) {
+        this.errorMessage = true;
+      }
+    }
+  }
 }

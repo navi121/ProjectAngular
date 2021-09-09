@@ -2,16 +2,16 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
-import { UserService } from './user.service';
+import { CartServiceService } from './cart-service.service';
 
-describe('UserService', () => {
-  let service: UserService;
+describe('CartServiceService', () => {
+  let service: CartServiceService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers:[HttpClient,HttpHandler,Router,Function]
     });
-    service = TestBed.inject(UserService);
+    service = TestBed.inject(CartServiceService);
   });
 
 });

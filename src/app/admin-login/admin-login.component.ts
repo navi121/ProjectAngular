@@ -11,33 +11,30 @@ import { UserService } from '../shared/user.service';
 })
 export class AdminLoginComponent implements OnInit {
   public admin: Admin;
-  public errorMessage: boolean;
-  constructor(private userService: UserService,
+  public errorMessage: boolean=false;
+  public constructor(private userService: UserService,
     private router: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.resetForm();
   }
 
   public resetForm(form?: NgForm) {
     if (form != null)
-      form.reset();
-    this.admin = {
-      Email: '',
-      Password: '',
-    }
+      form.reset;
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.errorMessage=true;
-    this.userService.adminLogin(form.value)
-    .subscribe(()=>{
+    this.admin=form.value;
+    try {
+      await this.userService.adminLogin(form.value).toPromise();
       this.router.navigateByUrl('addproduct');
-    this.resetForm(form);
+      this.resetForm();
     }
-    ,(error)=>{
-      this.errorMessage=true;
+    catch (errorResponse) {
+      if (errorResponse.status === 400) {
+        this.errorMessage = true;
+      }
     }
-    );
   }
 }

@@ -2,7 +2,7 @@
 <!-- <section id="about"> -->
 <div class="container">
   <div class="row">
-    <div class="col-md-3" *ngFor="let product of userService.list ">
+    <div class="col-md-3" *ngFor="let product of dashBoard.list ">
       <div class="card mb-3" *ngIf="product">
         <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top">
         <div class="card-body"><span>
@@ -45,7 +45,7 @@
     <li class="page-item"><a class="page-link" routerLink="/home">2</a></li>
     <li class="page-item"><a class="page-link" routerLink="/home">3</a></li>
     <li class="page-item">
-      <a class="page-link" href="#">Next</a>
+      <a class="page-link" routerLink="/home">Next</a>
     </li>
   </ul>
 </nav>

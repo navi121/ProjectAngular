@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -18,8 +18,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { AuthGuard } from './guards/auth.guard';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -40,12 +42,14 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService],
+  exports: [RouterModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

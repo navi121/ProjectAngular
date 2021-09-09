@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="dropdown" *ngIf="(isLoggedIn$ | async) as Loginstatus">
-      <div class="username" *ngIf="Loginstatus">Hi: {{userDisplayName}}</div>
+      <div class="username" *ngIf="Loginstatus">Hi: {{userService.userDisplayName}}</div>
       <div class="dropdown-content" *ngIf="(isLoggedIn$ | async) as Loginstatus">
         <a class="nav-link" (click)="logOut()" routerLink="/login" *ngIf="Loginstatus">LOGOUT</a>
       </div>

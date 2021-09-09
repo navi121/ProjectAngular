@@ -18,18 +18,20 @@ export class LoginComponent implements OnInit {
   public invalidLogin = false;
   public isLoggedIn$: Observable<boolean>;
   public user: Observable<UserLog>;
-  public errorMessage: boolean;
-  public msg:null;
+  public errorMessage: boolean = false;
+  public msg: null;
 
   public constructor(private userService: UserService,
-    public readonly router: Router) {}
-    public ngOnInit(): void {
+    public readonly router: Router) { }
+    
+  public ngOnInit(): void {
     this.resetForm();
-    this.isLoggedIn$=this.userService.isLoggedIn;
   }
-  public onclick(){
+
+  public onclick() {
     localStorage.removeItem('loggedUser');
   }
+
   public resetForm(form?: NgForm) {
     if (form != null)
       form.reset();
@@ -40,16 +42,16 @@ export class LoginComponent implements OnInit {
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.errorMessage=false;
-    this.userService.loginUser(form.value)
-      .subscribe(() => {
-        this.router.navigateByUrl('home');
-        this.resetForm(form);
+    this.login = form.value;
+    try {
+      await this.userService.loginUser(form.value).toPromise();
+      this.router.navigateByUrl('home');
+    }
+    catch (errorMessage) {
+      if (errorMessage === 400) {
+        this.errorMessage = true;
       }
-      ,(error)=>{
-        this.errorMessage=true;
-      }
-      );
+    }
   }
 }
 

@@ -11,7 +11,7 @@
       <th>Quantity Price</th>
     </tr>
     <tbody>
-      <tr class="cart-item" *ngFor="let getCart of items; let i=index">
+      <tr class="cart-item" *ngFor="let getCart of cartService.items; let i=index">
         <td>{{getCart.productName}}</td>
         <td>{{getCart.productDescription}}</td>
         <td>{{getCart.price}}</td>
@@ -30,9 +30,11 @@
             <input type="text" class="form-control" value={{getCart.total}} readonly>
           </div>
         </td>
-
+        <td>
+          <button class="btn btn-primary"  (click)="savecart(getCart)">Save</button>
+        </td>
       </tr>
-      <button class="btn btn-danger" (click)="clear">Clear Cart</button>
+      <button class="btn btn-danger" (click)="clear()">Clear Cart</button>
     </tbody>
   </table>
 </div>

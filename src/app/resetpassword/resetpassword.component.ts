@@ -12,8 +12,8 @@ import { UserService } from '../shared/user.service';
 export class ResetpasswordComponent implements OnInit {
 
   public pass: Pass;
-  public errorMessage: boolean;
-  constructor(private userService : UserService,
+  public errorMessage: boolean = false;
+  constructor(private userService: UserService,
     public readonly router: Router) { }
 
   ngOnInit(): void {
@@ -22,28 +22,22 @@ export class ResetpasswordComponent implements OnInit {
 
   public resetForm(form?: NgForm) {
     if (form != null)
-      form.reset();
-    this.pass = {
-     Password:'',
-     MobileNumber:'',
-     SecurityAnswer:'',
-     SecurityQuestion:''
-    }
+      form.reset;
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.errorMessage=false;
-    this.userService.resetPassword(form.value)
-    .subscribe(()=>{
-      // sessionStorage.setItem('loggedUser', this.login.Email);
-      //this.userService.loginUser(this.loginUser.Email);
-     this.router.navigateByUrl('login');
-    this.resetForm(form);
+    this.pass = form.value;
+    try {
+      await this.userService.resetPassword(form.value).toPromise();
+      this.router.navigateByUrl('login');
+      this.resetForm(form);
     }
-    ,(error)=>{
-      this.errorMessage=true;
+    catch (errorMessage) {
+      if (errorMessage === true) {
+        this.errorMessage = true;
+      }
     }
-    );
+
   }
 
 }

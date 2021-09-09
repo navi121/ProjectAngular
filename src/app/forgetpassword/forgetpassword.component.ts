@@ -11,32 +11,30 @@ import { NgForm } from '@angular/forms';
 export class ForgetpasswordComponent implements OnInit {
 
   public reset: Reset;
-  public errorMessage: boolean;
-  constructor(private userService : UserService,
+  public errorMessage: boolean = false;
+  public constructor(private userService: UserService,
     public readonly router: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.resetForm();
   }
 
   public resetForm(form?: NgForm) {
     if (form != null)
-      form.reset();
-    this.reset = {
-      Email: '',
-    }
+      form.reset;
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.errorMessage=false;
-    this.userService.resetUser(form.value)
-    .subscribe(()=>{
-     this.router.navigateByUrl('pass');
-    this.resetForm(form);
+    this.reset=form.value;
+    try {
+      await this.userService.resetUser(form.value).toPromise();
+      this.router.navigateByUrl('pass');
     }
-    ,(error)=>{
-      this.errorMessage=true;
+    catch (errorResponse) {
+      if (errorResponse === 400) {
+        this.errorMessage = true;
+      }
     }
-    );
+
   }
 }

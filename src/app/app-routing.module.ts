@@ -6,12 +6,12 @@ import { CartdetailsComponent } from './cartdetails/cartdetails.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ErrormessageComponent } from './errormessage/errormessage.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
-import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 const routes: Routes = [
   {path:'loggedUser', component:SignUpComponent},
   {path:'home', component:HomePageComponent},
