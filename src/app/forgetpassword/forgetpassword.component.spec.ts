@@ -1,7 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { UserService } from '../shared/user.service';
 
 import { ForgetpasswordComponent } from './forgetpassword.component';
@@ -68,12 +69,19 @@ describe('ForgetpasswordComponent', () => {
   
   fdescribe('On error', () => {
 
+    const errorResponse = new HttpErrorResponse({
+      error: { code: `some code`, message: `some message.` },
+      status: 400,
+      statusText: 'Bad Request',
+   });
+
     beforeEach(() => {
-      userServiceMock.resetUser.and.returnValue(of(Promise.reject('errorResponse')));
+      userServiceMock.resetUser.and.returnValue(throwError(errorResponse));
+      component.errorMessage=true;
     });
 
     it('if invalid credentials are entered , admin login should throw an error', () => {
-      expect(component.errorMessage).toEqual(false);
+      expect(component.errorMessage).toEqual(true);
     });
   })
 

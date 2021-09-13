@@ -20,27 +20,18 @@ export class SignUpComponent implements OnInit {
   }
   public resetForm(form?: NgForm) {
     if (form != null)
-      form.reset();
-    this.user = {
-      MobileNumber: '',
-      Password: '',
-      Email: '',
-      FirstName: '',
-      LastName: '',
-      SecurityAnswer: '',
-      SecurityQuestion: ''
-    }
+      form.reset;
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.user=form.value;
+    this.user = form.value;
     try {
       await this.userService.registerUser(form.value).toPromise();
       this.router.navigateByUrl('login');
       this.resetForm(form);
     }
     catch (errorResponse) {
-      if (errorResponse === 400) {
+      if (errorResponse.status === 400) {
         this.errorMessage = true;
       }
     }

@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AddItem, User, UserLog, CartItem, Reset, Pass, Admin, Img } from './user.model';
-import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import { CartItem } from './user.model';
 import { UserService } from './user.service';
 
 @Injectable({

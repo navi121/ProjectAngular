@@ -52,7 +52,7 @@ describe('CartdetailsComponent', () => {
     
     it('should have called clearCart function', () => {
       const req=cartServiceMock.clearCart();
-      expect(cartServiceMock.clearCart).toHaveBeenCalled;
+      expect(cartServiceMock.clearCart).toHaveBeenCalledTimes(1);
     });
 
     it('should have called plus function', () => {

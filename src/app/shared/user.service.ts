@@ -7,12 +7,11 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class UserService {
-  isAuthenticated = false;
-  public checkStatus = {};
   public userDisplayName: string | null;
+  public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
+  public get isLoggedIn() {
+    return this.loggedIn.asObservable();
   }
 
   readonly rootUrl = 'http://localhost:50278';
@@ -20,17 +19,18 @@ export class UserService {
     private router: Router) { }
 
   public loginUser(login: UserLog): Observable<any> {
+    this.loggedIn.next(true);
     localStorage.setItem('loggedUser', login.Email);
     this.userDisplayName = localStorage.getItem('loggedUser');
     const body: UserLog = {
       Password: login.Password,
       Email: login.Email,
     }
-    this.isAuthenticated = true;
     return this.http.post(this.rootUrl + '/UserLogin/NormalUserLogin', body);
   }
 
   public logOut() {
+    this.loggedIn.next(false);
     this.router.navigateByUrl('/login');
   }
 
@@ -72,5 +72,4 @@ export class UserService {
     }
     return this.http.post(this.rootUrl + '/UserLogin/AdminUserLogin', body);
   }
-
 }

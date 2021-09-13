@@ -1,9 +1,9 @@
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { UserService } from '../shared/user.service';
 
 import { SignUpComponent } from './sign-up.component';
@@ -81,13 +81,20 @@ describe('SignUpComponent', () => {
 
   fdescribe('On error', () => {
 
+    const errorResponse = new HttpErrorResponse({
+      error: { code: `some code`, message: `some message.` },
+      status: 400,
+      statusText: 'Bad Request',
+   });
+
     beforeEach(() => {
-      (
-        userServiceMock.registerUser.and.returnValue(of(Promise.reject('errorResponse'))));
+        userServiceMock.registerUser.and.returnValue(throwError(errorResponse));
+        component.errorMessage=true;
     });
 
     it('if invalid credentials are entered , signUp should throw an error', () => {
-      expect(component.errorMessage).toEqual(false);
+      expect(component.errorMessage).toEqual(true);
+
     });
 
   })

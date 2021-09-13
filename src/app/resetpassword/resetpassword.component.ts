@@ -33,7 +33,7 @@ export class ResetpasswordComponent implements OnInit {
       this.resetForm(form);
     }
     catch (errorMessage) {
-      if (errorMessage === true) {
+      if (errorMessage.status === true) {
         this.errorMessage = true;
       }
     }

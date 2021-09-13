@@ -31,7 +31,7 @@ export class ForgetpasswordComponent implements OnInit {
       this.router.navigateByUrl('pass');
     }
     catch (errorResponse) {
-      if (errorResponse === 400) {
+      if (errorResponse.status === 400) {
         this.errorMessage = true;
       }
     }

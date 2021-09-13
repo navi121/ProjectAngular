@@ -29,7 +29,7 @@ export class AdminLoginComponent implements OnInit {
     try {
       await this.userService.adminLogin(form.value).toPromise();
       this.router.navigateByUrl('addproduct');
-      this.resetForm();
+      this.resetForm(form);
     }
     catch (errorResponse) {
       if (errorResponse.status === 400) {

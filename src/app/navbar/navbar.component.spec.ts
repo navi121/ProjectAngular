@@ -45,7 +45,7 @@ describe('NavbarComponent', () => {
 
     it('should have called logOut function', () => {
       const req=userServiceMock.logOut();
-      expect(userServiceMock.logOut).toHaveBeenCalled;
+      expect(userServiceMock.logOut).toHaveBeenCalledTimes(1);
     });
 
     it('should have called searchCategory()', () => {

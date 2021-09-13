@@ -5,7 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Admin, User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 
@@ -54,6 +54,7 @@ describe('AdminLoginComponent', () => {
 
     beforeEach(fakeAsync(() => {
       component.OnSubmit(testForm);
+      component.ngOnInit();
       tick();
     }));
 
@@ -75,14 +76,19 @@ describe('AdminLoginComponent', () => {
   });
 
   fdescribe('On error', () => {
-
+    const errorResponse = new HttpErrorResponse({
+      error: { code: `some code`, message: `some message.` },
+      status: 400,
+      statusText: 'Bad Request',
+   });
     beforeEach(() => {
       (
-        userServiceMock.adminLogin.and.returnValue(of(Promise.reject('errorResponse'))));
+        userServiceMock.adminLogin.and.returnValue(throwError(errorResponse)));
+        component.errorMessage=true;
     });
 
     it('if invalid credentials are entered , admin login should throw an error', () => {
-      expect(component.errorMessage).toEqual(false);
+      expect(component.errorMessage).toEqual(true);
     });
   })
 });

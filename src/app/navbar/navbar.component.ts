@@ -17,23 +17,29 @@ export class NavbarComponent implements OnInit {
   public constructor(public userService: UserService, public dashBoard : DashBoardService) { }
 
   public ngOnInit(): void {
+    this.isLoggedIn$=this.userService.isLoggedIn;
   }
+
   public logOut() {
     localStorage.removeItem('loggedUser');
     this.userService.logOut();
   }
+
   public search(){
     this.keyword=this.searchText;
     this.dashBoard.searchProduct(this.keyword);
   }
+
   public searchMen(){
     this.keyword="Men";
     this.dashBoard.searchCategory(this.keyword);
   }
+
   public searchWomen(){
     this.keyword="Women";
     this.dashBoard.searchCategory(this.keyword);
   }
+  
   public searchKid(){
     this.keyword="KId";
     this.dashBoard.searchCategory(this.keyword);
