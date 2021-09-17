@@ -8,21 +8,19 @@ import { UserService } from './user.service';
 })
 export class CartServiceService {
   items: CartItem[] = [];
+  buyItem: CartItem[] = [];
   
   readonly rootUrl = 'http://localhost:50278';
   public constructor(private http: HttpClient,public userService : UserService) { }
 
   public addToCart(product: CartItem, size: string) {
     product.size = size;
-    const body: CartItem = {
-      productName: product.productName,
-      productDescription: product.productDescription,
-      price: product.price,
-      size: product.size,
-      quantity: product.quantity,
-      total: product.total
-    }
     this.items.push(product);
+  }
+
+  public buyNow(product: CartItem, size: string) {
+    product.size = size;
+    this.buyItem.push(product);
   }
 
   public SaveCart(product: CartItem) {
@@ -32,7 +30,8 @@ export class CartServiceService {
       size: product.size,
       price: product.price,
       total: product.total,
-      quantity: product.quantity
+      quantity: product.quantity,
+      image: product.image
     }
     return this.http.post(this.rootUrl + '/AddCartDetails/' + this.userService.userDisplayName, body);
   }
@@ -42,5 +41,8 @@ export class CartServiceService {
   }
   public clearCart() {
     this.items = [];
+  }
+  public clearBuyNow(){
+    this.buyItem = [];
   }
 }

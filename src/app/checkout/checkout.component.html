@@ -1,85 +1,128 @@
-<html>
-
-<head>
-    <title>Payment Form</title>
-    <link rel="stylesheet" href="../checkout/checkout.component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
-    <div class="container">
-        <h2>Confirm Your Payment</h2>
-        <div class="first-row">
-            <div class="address">
-                <h5>Address <i class="fa fa-address-card-o"></i> </h5>
-                <div class="input-field">
-                    <input type="text" required>
-                </div>
-                <h5>State <i class="fa fa-globe" aria-hidden="true"></i></h5>
-                <div class="input-field">
-                    <input type="text" required>
-                </div>
-                <h5>Zip Code</h5>
-                <div class="input-field">
-                    <input type="number" required>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-top border-bottom text-center">
+            <a class="nav-link active" routerLink="/home" aria-current="page" href="#" (click)="clear()">Back to
+                shop</a>
+            <span id="logo">PAYMENT</span>
         </div>
-        <div class="second-row">
-            <div class="owner" style="float: right;margin-top: -31%;">
-                <h5>Name on Card <i class="fa fa-user"></i></h5>
-                <div class="input-field">
-                    <input type="text" required>
-                </div>
-                <h5>CVV <i class="fa fa-credit-card-alt"></i></h5>
-                <div class="input-field">
-                    <input type="password" required>
-                </div>
-                <h5>Card Number</h5>
-                <div class="input-field">
-                    <input type="text" required>
-                </div>
-            </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="left border">
+                        <form>
+                            <span>Name:</span>
+                            <input type="text" name="Name" placeholder="Enter Your Name" required minlength="3">
+                            <span>Mobile Number:</span>
+                            <input placeholder="Enter 10 Digit Number" required>
+                            <span>Shipping Address:</span>
+                            <input placeholder="Address" type="textarea" required>
+                            <div class="row">
+                                <div class="col-4"><span>Counry:</span>
+                                    <input placeholder="Country">
+                                </div>
+                                <div class="col-4"><span>State:</span> <input placeholder="State"> </div>
+                                <div class="col-4"><span>Zipcode:</span> <input placeholder="Zipcode"> </div>
 
-        </div>
-        <div class="second-row">
-            <h4>Date In Card</h4>
-            <div class="selection">
-                <div class="date">
-                    <select>
-                        <option value="Jan">Jan</option>
-                        <option value="Feb">Feb</option>
-                        <option value="Mar">Mar</option>
-                        <option value="Apr">Apr</option>
-                        <option value="May">May</option>
-                        <option value="Jun">Jun</option>
-                        <option value="Jul">Jul</option>
-                        <option value="Aug">Aug</option>
-                        <option value="Sep">Sep</option>
-                        <option value="Oct">Oct</option>
-                        <option value="Nov">Nov</option>
-                        <option value="Dec">Dec</option>
-                    </select>
-                    <select>
-                        <option value="2020">2020</option>
-                        <option value="2019">2021</option>
-                        <option value="2018">2022</option>
-                        <option value="2017">2023</option>
-                        <option value="2016">2024</option>
-                        <option value="2015">2025</option>
-                    </select>
+                            </div>
+                        </form>
+
+                        <span style="font-size: 15px;">PAYMENT TYPE:</span>
+
+                        <select id="payment" (change)="onChange($event)">
+                            <option value="COD">CASH ON DELIVERY</option>
+                            <option value="CARD">CARD</option>
+                        </select>
+                    </div>
+                    <br>
+
                 </div>
 
+                <div class="col-md-5">
+                    <div *ngFor="let getCart of cartService.buyItem">
+                        <div class="right border">
+                            <div class="header">Order Summary</div>
+                            <div class="row item" >
+                                <div class="col-4 align-self-center">
+
+                                    <img class="img-fluid" src="{{'data:image/jpg;base64,' +getCart.image}}">
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <h6><b>Price:${{getCart.price}}</b></h6>
+                                        <h6>Size:{{getCart.size}}</h6>
+                                    </div>
+                                    <div class="row text-muted"><b>{{getCart.productName}}</b></div>
+                                    <br>
+
+                                </div>
+                                <div class="col-2">
+                                    <button (click)="clear()"><i style="color: rgb(194, 25, 25);" class="fa fa-trash"
+                                            aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-5">
+                                        <h6><b>Quantity:</b></h6>
+                                    </div>
+                                    <div class="col-2">
+                                        <button><i class="fa fa-plus" (click)="plus(getCart)"></i></button>
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="text" style="width: 30px;height: 25px;" class="form-control"
+                                            value={{getCart.quantity}} readonly>
+                                    </div>
+                                    <div class="col-2">
+                                        <button><i class="fa fa-minus" (click)="minus(getCart)"></i></button>
+                                    </div>
+
+                                </div>
+                                <span>Total: </span>
+                                <input type="text" class="form-control" value={{getCart.total}} readonly>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row lower">
+                            <div class="col text-left">Subtotal</div>
+                            <div class="col text-right">
+                                <div class="col text-right"><b>{{cartTotal}}</b></div>
+                            </div>
+                        </div>
+                        <div class="row lower">
+                            <div class="col text-left">Delivery</div>
+                            <div class="col text-right">Free</div>
+                        </div>
+                        <div class="row lower">
+                            <div class="col text-left"><b>Total to pay</b></div>
+                            <div class="col text-right"><b>{{cartTotal}}</b></div>
+                        </div>
+                        <button class="btn" (click)="savecart(getCart)" routerLink='/error'>Place order</button>
+                        <p class="text-muted text-center">Complimentary Shipping & Returns</p>
+                    </div>
+                </div>
+                <div class="col-md-7" *ngIf="card">
+                    <div class="left border">
+                        <div class="row"> <span class="header">Payment</span>
+                            <div class="icons"> <img src="https://img.icons8.com/color/48/000000/visa.png" /> <img
+                                    src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /> <img
+                                    src="https://img.icons8.com/color/48/000000/maestro.png" /> </div>
+                        </div>
+                        <form> <span>Cardholder's name:</span> <input placeholder="Nessie"> <span>Card Number:</span>
+                            <input placeholder="0125 6780 4567 9909">
+                            <div class="row">
+                                <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
+                                <div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
-        <div class="icon-container">
-            <i class="fa fa-cc-visa" style="color:navy;"></i>
-            <i class="fa fa-cc-amex" style="color:blue;"></i>
-            <i class="fa fa-cc-mastercard" style="color:red;"></i>
-            <i class="fa fa-cc-discover" style="color:orange;"></i>
-        </div>
-        <button type="button" class="btn btn-success" routerLink="/error">Confirm</button>
+        <div> </div>
     </div>
 </body>
-
-</html>

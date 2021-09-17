@@ -1,85 +1,184 @@
- * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   font-family: 'Poppins', sans-serif;
- }
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 0, 34);
+  font-size: 0.8rem;
+  font-family: 'Arial', sans-serif;
+      background: url(../bruno-kelzer-LvySG1hvuzI-unsplash.jpg) no-repeat;
+      background-size: cover;      
+}
 
- body {
-   width: 100%;
-   height: 100vh;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background-color: rgb(32, 32, 32);
- }
+.card {
+  max-width: 1000px;
+  margin: 2vh
+}
 
- .container {
-   width: 750px;
-   height: 500px;
-   border: 1px solid;
-   background-color: white;
-   display: flex;
-   flex-direction: column;
-   padding: 40px;
-   justify-content: space-around;
- }
+.card-top {
+  padding: 0.7rem 5rem
+}
 
- .container h1 {
-   text-align: center;
- }
+.card-top a {
+  float: left;
+  margin-top: 0.7rem
+}
 
- .first-row {
-   display: flex;
- }
+#logo {
+  font-family: 'Dancing Script';
+  font-weight: bold;
+  font-size: 1.6rem
+}
 
- .address {
-   width: 30%;
-   margin-right: 20px;
- }
+.card-body {
+  padding: 0 5rem 5rem 5rem;
+  background-size: cover;
+  background-repeat: no-repeat
+}
 
- .owner {
-   width: 30%;
-   margin-right: 40px;
- }
+@media(max-width:768px) {
+  .card-body {
+      padding: 0 1rem 1rem 1rem;
+      background-size: cover;
+      background-repeat: no-repeat
+  }
 
- .cvv {
-   width: 20%;
-   margin-left: 40px;
- }
+  .card-top {
+      padding: 0.7rem 1rem
+  }
+}
 
- .input-field {
-   border: 1px solid #999;
- }
+.row {
+  margin: 0
+}
 
- .input-field input {
-   width: 100%;
-   border: none;
-   outline: none;
-   padding: 10px;
- }
+.upper {
+  padding: 1rem 0;
+  justify-content: space-evenly
+}
 
- .selection {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
- }
+#three {
+  border-radius: 1rem;
+  width: 22px;
+  height: 22px;
+  margin-right: 3px;
+  border: 1px solid blue;
+  text-align: center;
+  display: inline-block
+}
 
- .selection select {
-   padding: 10px 20px;
- }
+#payment {
+  margin: 0;
+  color: blue
+}
 
- a {
-   background-color: blueviolet;
-   color: white;
-   text-align: center;
-   text-transform: uppercase;
-   text-decoration: none;
-   padding: 10px;
-   font-size: 18px;
-   transition: 0.5s;
- }
+.icons {
+  margin-left: auto
+}
 
- a:hover {
-   background-color: dodgerblue;
- }
+form span {
+  color: rgb(179, 179, 179)
+}
+
+form {
+  padding: 2vh 0
+}
+
+input {
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247)
+}
+select{
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247)
+}
+input:focus::-webkit-input-placeholder {
+  color: transparent
+}
+
+.header {
+  font-size: 1.5rem
+}
+
+.left {
+  background-color: #ffffff;
+  padding: 2vh
+}
+
+.left img {
+  width: 2rem
+}
+
+.left .col-4 {
+  padding-left: 0
+}
+
+.right .item {
+  padding: 0.3rem 0
+}
+
+.right {
+  background-color: #ffffff;
+  padding: 2vh
+}
+
+.col-8 {
+  padding: 0 1vh
+}
+
+.lower {
+  line-height: 2
+}
+
+.btn {
+  background-color: rgb(23, 4, 189);
+  border-color: rgb(23, 4, 189);
+  color: white;
+  width: 100%;
+  font-size: 0.7rem;
+  margin: 4vh 0 1.5vh 0;
+  padding: 1.5vh;
+  border-radius: 0
+}
+
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+  box-shadow: none;
+  color: white;
+  -webkit-box-shadow: none;
+  transition: none
+}
+
+.btn:hover {
+  color: white
+}
+
+a {
+  color: black
+}
+
+a:hover {
+  color: black;
+  text-decoration: none
+}
+
+input[type=checkbox] {
+  width: unset;
+  margin-bottom: unset
+}
+
+#cvv {
+  background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center
+}

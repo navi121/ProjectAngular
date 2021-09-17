@@ -55,9 +55,9 @@ export class CartdetailsComponent implements OnInit {
   }
 
   public savecart(getCart : CartItem){
-    this.cartService.SaveCart(getCart)
-    .subscribe(
-      res => {
-      });
+    this.cartService.SaveCart(getCart).toPromise();
+    // .subscribe(
+    //   res => {
+    //   });
   }
 }

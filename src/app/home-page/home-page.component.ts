@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DashBoardService } from '../shared/dash-board.service';
 import { CartServiceService } from '../shared/cart-service.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-home-page',
@@ -12,17 +13,23 @@ import { CartServiceService } from '../shared/cart-service.service';
 })
 export class HomePageComponent implements OnInit {
   public size: string = "S";
+  public isLoggedIn$: Observable<boolean>;
   
   public addToCart(product: CartItem) {
     this.cartService.addToCart(product, this.size);
     window.alert('product added');
-
   }
 
-  public constructor(public dashBoard: DashBoardService, public cartService: CartServiceService) { }
+  public BuyNow(product: CartItem) {
+    this.cartService.addToCart(product, this.size);
+    this.cartService.buyNow(product, this.size);
+  }
+
+  public constructor(public dashBoard: DashBoardService, public cartService: CartServiceService,public userService: UserService) { }
 
   public ngOnInit(): void {
     this.dashBoard.getdetails();
+    this.isLoggedIn$=this.userService.isLoggedIn;
   }
 
   public changeSize(event: any) {

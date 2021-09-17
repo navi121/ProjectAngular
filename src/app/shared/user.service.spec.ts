@@ -10,7 +10,7 @@ describe('UserService', () => {
   let userServiceMock: jasmine.SpyObj<UserService>;
   let routerMock: jasmine.SpyObj<Router>;
   let localStorageServiceSpy = jasmine.createSpyObj<typeof localStorage>('localStorage', ['getItem', 'setItem'])
-  //var storage: boolean;
+  
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -92,7 +92,6 @@ describe('UserService', () => {
     it('should get boolean value whether user is logged in or not if loggedin it should return true', () =>{
       expect(userServiceMock.isLoggedIn).toBeTruthy;
     })
-
   });
 
 });

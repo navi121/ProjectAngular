@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="../home-page/home-page.component.css">
-<!-- <section id="about"> -->
 <div class="container">
   <div class="row">
     <div class="col-md-3" *ngFor="let product of dashBoard.list ">
@@ -11,25 +10,38 @@
             <p class="card-price">Price : ₹{{product.price}}</p>
             <form name="myForm">
               <p class="card-size">Size :</p>
-                <div class="form-check form-check-inline pl-0" novalidate>
-                  <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)" value="S"
-                  required="required" checked/>
-                  <label class="form-check-label small text-uppercase card-link-secondary"
-                    for="small" >S</label>
-                </div>
-                <div class="form-check form-check-inline pl-0">
-                  <input type="radio" class="form-check-input"  name="materialExampleRadios" (change)="changeSize($event)" value="M" />
-                  <label class="form-check-label small text-uppercase card-link-secondary"
-                    for="medium" >M</label>
-                </div>
-                <div class="form-check form-check-inline pl-0">
-                  <input type="radio" class="form-check-input"  name="materialExampleRadios" (change)="changeSize($event)" value="L" />
-                  <label class="form-check-label small text-uppercase card-link-secondary"
-                    for="large" >L</label>
+              <div class="form-check form-check-inline pl-0" novalidate>
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                  value="S" required="required" checked />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="small">S</label>
+              </div>
+              <div class="form-check form-check-inline pl-0">
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                  value="M" />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="medium">M</label>
+              </div>
+              <div class="form-check form-check-inline pl-0">
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                  value="L" />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="large">L</label>
               </div>
             </form>
-            <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
-              Cart</button><button type="button" class="btn btn-success" (click)="addToCart(product)">Buy Now</button>
+            <div class="buyNow" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+              <div class="sub class" *ngIf="Loginstatus">
+                <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
+                  Cart</button>
+                <button type="button" class="btn btn-success" routerLink='/login'>Buy
+                  Now</button>
+              </div>
+            </div>
+            <div class="buyNow" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+              <div class="sub class" *ngIf="Loginstatus">
+                <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
+                  Cart</button>
+                <button type="button" class="btn btn-success" (click)="BuyNow(product)" routerLink='/checkout'>Buy
+                  Now</button>
+              </div>
+            </div>
           </span>
         </div>
       </div>
@@ -49,11 +61,3 @@
     </li>
   </ul>
 </nav>
-
-
-
-
-
-
-
-

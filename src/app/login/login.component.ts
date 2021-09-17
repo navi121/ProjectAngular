@@ -48,11 +48,9 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('home');
     }
     catch (errorMessage) {
-      if (errorMessage.status === 400) {
+      if (errorMessage.status === 401) {
         this.errorMessage = true;
       }
     }
   }
 }
-
-

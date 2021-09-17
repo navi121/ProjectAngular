@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CartServiceService } from '../shared/cart-service.service';
 import { DashBoardService } from '../shared/dash-board.service';
-import { Search } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 @Component({
   selector: 'navbar',
@@ -14,10 +12,14 @@ export class NavbarComponent implements OnInit {
   public isLoggedIn$: Observable<boolean>;
   public searchText:any;
   public keyword: string;
-  public constructor(public userService: UserService, public dashBoard : DashBoardService) { }
+  public constructor(public userService: UserService, public dashBoard : DashBoardService, public cartService : CartServiceService) { }
 
   public ngOnInit(): void {
     this.isLoggedIn$=this.userService.isLoggedIn;
+  }
+
+  public clear() {
+    this.cartService.clearBuyNow();
   }
 
   public logOut() {

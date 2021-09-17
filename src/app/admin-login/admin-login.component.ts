@@ -32,7 +32,7 @@ export class AdminLoginComponent implements OnInit {
       this.resetForm(form);
     }
     catch (errorResponse) {
-      if (errorResponse.status === 400) {
+      if (errorResponse.status === 401) {
         this.errorMessage = true;
       }
     }

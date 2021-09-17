@@ -43,7 +43,6 @@ describe('CartServiceService', () => {
       expect(service.addToCart).toHaveBeenCalledOnceWith(testForm.value,size);
     });
 
-
     it('should have called SaveCart', () => {
       const req = cartServiceMock.SaveCart(testForm.value);
       expect(service.SaveCart).toHaveBeenCalledWith(testForm.value);
@@ -56,7 +55,6 @@ describe('CartServiceService', () => {
     it('should have called clearCart', () => {
       expect(service.clearCart).toHaveBeenCalled;
     });
-
   });
 
 });
