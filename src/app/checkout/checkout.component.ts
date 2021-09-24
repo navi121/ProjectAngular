@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CartServiceService } from '../shared/cart-service.service';
-import { CartItem } from '../shared/user.model';
+import { CartItem, PlaceOrder } from '../shared/user.model';
 
 @Component({
   selector: 'app-checkout',
@@ -8,6 +10,7 @@ import { CartItem } from '../shared/user.model';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  public order: PlaceOrder;
   public cartItems: any = [];
   cartTotal = 0;
   public card: boolean;
@@ -21,52 +24,56 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  public constructor(public cartService: CartServiceService) { }
+  public constructor(public router: Router,public cartService: CartServiceService) { }
 
   public ngOnInit(): void {
+    this.resetForm();
   }
 
-  public clear() {
-    this.cartService.clearBuyNow();
-  }
-
-  plus(getCart: CartItem) {
-    var n = Number(getCart.quantity);
-    n++;
-    getCart.quantity = String(n);
-    var finalp = Number(getCart.price) * n;
-    getCart.total = String(finalp);
-    this.cartItems.push({
-      productName: getCart.productName,
-      qty: 1,
-      price: getCart.price
-    })
-    this.cartTotal = 0
-    this.cartItems.forEach((item: any) => {
-      this.cartTotal += (item.qty * item.price)
-    })
-  }
-
-  minus(getCart: CartItem) {
-    var n = Number(getCart.quantity);
-    if (n != 0) {
-      n--;
-      getCart.quantity = String(n);
-      var finalp = Number(getCart.price);
-      finalp = finalp * n;
-      getCart.total = String(finalp);
-      this.cartTotal -= Number(getCart.price);
-      if (n == 0) {
-        this.cartItems = [];
-      }
+  public resetForm(form?: NgForm) {
+    if (form != null)
+      form.reset;
+    this.order = {
+      name: '',
+      mobileNumber: '',
+      address: '',
+      state: '',
+      country: '',
+      zipCode: '',
+      productName: '',
+      productDescription: '',
+      price: '',
+      size: '',
+      quantity: '',
+      total: ''
     }
   }
 
-  public savecart(getCart : CartItem){
-    this.cartService.SaveCart(getCart).toPromise();
-    // .subscribe(
-    //   res => {
-    //   });
+  public SaveOrder() {
+
   }
 
+  public clear() {
+    this.cartService.clearCart();
+  }
+
+  plus(getCart: CartItem) {
+    this.cartService.plusProduct(getCart);
+  }
+
+  minus(getCart: CartItem) {
+    this.cartService.minusProduct(getCart);
+  }
+
+  public savecart(getCart: CartItem) {
+    this.cartService.SaveCart(getCart).toPromise();
+  }
+
+  public async OnSubmit(form: NgForm): Promise<void> {
+    this.order = form.value;
+    await this.cartService.SaveOrder(form.value).toPromise();
+    this.router.navigateByUrl('error');
+    this.cartService.orderItems=[];
+    this.resetForm(form);
+  }
 }

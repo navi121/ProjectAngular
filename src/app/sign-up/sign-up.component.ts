@@ -21,6 +21,15 @@ export class SignUpComponent implements OnInit {
   public resetForm(form?: NgForm) {
     if (form != null)
       form.reset;
+    this.user = {
+      Password: '',
+      Email: '',
+      FirstName: '',
+      LastName: '',
+      SecurityQuestion: '',
+      SecurityAnswer: '',
+      MobileNumber: ''
+    }
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {

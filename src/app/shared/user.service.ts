@@ -26,7 +26,7 @@ export class UserService {
       Password: login.Password,
       Email: login.Email,
     }
-    return this.http.post(this.rootUrl + '/UserLogin/NormalUserLogin', body);
+    return this.http.post(this.rootUrl + '/UserLogin', body);
   }
 
   public logOut() {
@@ -62,7 +62,7 @@ export class UserService {
       SecurityAnswer: user.SecurityAnswer,
       SecurityQuestion: user.SecurityQuestion
     }
-    return this.http.post(this.rootUrl + '/UserSignUp/AddUser', body);
+    return this.http.post(this.rootUrl + '/AddUser', body);
   }
 
   public adminLogin(admin: Admin): Observable<any> {
@@ -70,6 +70,6 @@ export class UserService {
       Password: admin.Password,
       Email: admin.Email
     }
-    return this.http.post(this.rootUrl + '/UserLogin/AdminUserLogin', body);
+    return this.http.post(this.rootUrl + '/AdminUserLogin', body);
   }
 }

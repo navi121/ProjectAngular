@@ -52,3 +52,17 @@ export class Search{
 export class Img{
     image: string;
 }
+export class PlaceOrder{
+    name: string;
+    mobileNumber: string;
+    address: string;
+    state: string;
+    country: string;
+    zipCode: string;
+    productName: string;
+    productDescription: string;
+    price: string;
+    size: string;
+    quantity: string;
+    total: string;
+}

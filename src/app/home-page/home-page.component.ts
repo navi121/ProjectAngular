@@ -13,7 +13,12 @@ import { UserService } from '../shared/user.service';
 })
 export class HomePageComponent implements OnInit {
   public size: string = "S";
+  public page: number=1;
   public isLoggedIn$: Observable<boolean>;
+  
+  public changeSize(event: any) {
+    this.size = event.target.value;
+  }
   
   public addToCart(product: CartItem) {
     this.cartService.addToCart(product, this.size);
@@ -22,7 +27,6 @@ export class HomePageComponent implements OnInit {
 
   public BuyNow(product: CartItem) {
     this.cartService.addToCart(product, this.size);
-    this.cartService.buyNow(product, this.size);
   }
 
   public constructor(public dashBoard: DashBoardService, public cartService: CartServiceService,public userService: UserService) { }
@@ -30,9 +34,5 @@ export class HomePageComponent implements OnInit {
   public ngOnInit(): void {
     this.dashBoard.getdetails();
     this.isLoggedIn$=this.userService.isLoggedIn;
-  }
-
-  public changeSize(event: any) {
-    this.size = event.target.value;
   }
 }

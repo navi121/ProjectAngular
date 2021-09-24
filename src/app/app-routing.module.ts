@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 const routes: Routes = [
   {path:'loggedUser', component:SignUpComponent},
   {path:'home', component:HomePageComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:'pass',component:ResetpasswordComponent},
   {path:'admin',component:AdminLoginComponent},
   {path:'navbar',component:NavbarComponent},
+  {path:'order',component:MyOrdersComponent},
   {path:'',redirectTo:'/login',pathMatch:'full'}
 ];
 

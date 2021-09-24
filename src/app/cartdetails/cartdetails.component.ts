@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { IndexedAccessType } from 'typescript';
 import { CartServiceService } from '../shared/cart-service.service';
 import { AddItem, CartItem } from '../shared/user.model';
@@ -10,54 +11,29 @@ import { AddItem, CartItem } from '../shared/user.model';
 })
 export class CartdetailsComponent implements OnInit {
   public cartItems: any = [];
-  cartTotal = 0;
-  
   public constructor(public cartService: CartServiceService) { }
 
   public ngOnInit(): void {
-
+    this.cartService.getCartDetails();
   }
 
-  public clear(){
+  public clear() {
     this.cartService.clearCart();
   }
 
   plus(getCart: CartItem) {
-    var n = Number(getCart.quantity);
-    n++;
-    getCart.quantity = String(n);
-    var finalp = Number(getCart.price) * n;
-    getCart.total = String(finalp);
-    this.cartItems.push({
-      productName: getCart.productName,
-      qty: 1,
-      price: getCart.price
-    })
-    this.cartTotal = 0
-    this.cartItems.forEach((item: any) => {
-      this.cartTotal += (item.qty * item.price)
-    })
+   this.cartService.plusProduct(getCart);
   }
 
   minus(getCart: CartItem) {
-    var n = Number(getCart.quantity);
-    if (n != 0) {
-      n--;
-      getCart.quantity = String(n);
-      var finalp = Number(getCart.price);
-      finalp = finalp * n;
-      getCart.total = String(finalp);
-      this.cartTotal -= Number(getCart.price);
-      if (n == 0) {
-        this.cartItems = [];
-      }
-    }
+   this.cartService.minusProduct(getCart);
   }
 
-  public savecart(getCart : CartItem){
+  public BuyNow(getCart: CartItem) {
+    this.cartService.placeOrder(getCart);
+  }
+
+  public savecart(getCart: CartItem) {
     this.cartService.SaveCart(getCart).toPromise();
-    // .subscribe(
-    //   res => {
-    //   });
   }
 }

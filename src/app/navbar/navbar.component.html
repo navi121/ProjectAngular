@@ -40,6 +40,7 @@
     <div class="dropdown" *ngIf="(isLoggedIn$ | async) as Loginstatus">
       <div class="username" *ngIf="Loginstatus">Hi: {{userService.userDisplayName}}</div>
       <div class="dropdown-content" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+        <a class="nav-link" routerLink="/order" *ngIf="Loginstatus">My Order</a>
         <a class="nav-link" (click)="logOut()" routerLink="/login" *ngIf="Loginstatus">LOGOUT</a>
       </div>
     </div>

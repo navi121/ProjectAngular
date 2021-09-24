@@ -10,40 +10,48 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-7">
-                    <div class="left border">
-                        <form>
+                    <form method="post" #OrderDetailsForm="ngForm" (ngSubmit)="OnSubmit(OrderDetailsForm)">
+                        <div class="left border">
                             <span>Name:</span>
-                            <input type="text" name="Name" placeholder="Enter Your Name" required minlength="3">
+                            <input type="text" name="name" placeholder="Enter Your Name" #name="ngModel"
+                                [(ngModel)]="order.name" required minlength="3">
                             <span>Mobile Number:</span>
-                            <input placeholder="Enter 10 Digit Number" required>
+                            <input placeholder="Enter 10 Digit Number" name="mobileNumber" #mobileNumber="ngModel"
+                                [(ngModel)]="order.mobileNumber" required>
                             <span>Shipping Address:</span>
-                            <input placeholder="Address" type="textarea" required>
+                            <input placeholder="Address" type="textarea" name="address" #address="ngModel"
+                                [(ngModel)]="order.address" required>
                             <div class="row">
-                                <div class="col-4"><span>Counry:</span>
-                                    <input placeholder="Country">
+                                <div class="col-4"><span>Country:</span>
+                                    <input placeholder="Country" name="country" #country="ngModel"
+                                        [(ngModel)]="order.country">
                                 </div>
-                                <div class="col-4"><span>State:</span> <input placeholder="State"> </div>
-                                <div class="col-4"><span>Zipcode:</span> <input placeholder="Zipcode"> </div>
+                                <div class="col-4"><span>State:</span> <input placeholder="State" name="state"
+                                        #state="ngModel" [(ngModel)]="order.state"> </div>
+                                <div class="col-4"><span>Zipcode:</span> <input placeholder="Zipcode" name="zipCode"
+                                        #zipCode="ngModel" [(ngModel)]="order.zipCode"> </div>
 
                             </div>
-                        </form>
 
-                        <span style="font-size: 15px;">PAYMENT TYPE:</span>
 
-                        <select id="payment" (change)="onChange($event)">
-                            <option value="COD">CASH ON DELIVERY</option>
-                            <option value="CARD">CARD</option>
-                        </select>
-                    </div>
+                            <span style="font-size: 15px;">PAYMENT TYPE:</span>
+
+                            <select id="payment" (change)="onChange($event)">
+                                <option value="COD">CASH ON DELIVERY</option>
+                                <option value="CARD">CARD</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Place Order">
+                    </form>
                     <br>
 
                 </div>
 
                 <div class="col-md-5">
-                    <div *ngFor="let getCart of cartService.buyItem">
+                    <div>
                         <div class="right border">
                             <div class="header">Order Summary</div>
-                            <div class="row item" >
+                            <div class="row item" *ngFor="let getCart of cartService.items">
                                 <div class="col-4 align-self-center">
 
                                     <img class="img-fluid" src="{{'data:image/jpg;base64,' +getCart.image}}">
@@ -89,7 +97,7 @@
                         <div class="row lower">
                             <div class="col text-left">Subtotal</div>
                             <div class="col text-right">
-                                <div class="col text-right"><b>{{cartTotal}}</b></div>
+                                <div class="col text-right"><b>{{cartService.cartTotal}}</b></div>
                             </div>
                         </div>
                         <div class="row lower">
@@ -98,9 +106,9 @@
                         </div>
                         <div class="row lower">
                             <div class="col text-left"><b>Total to pay</b></div>
-                            <div class="col text-right"><b>{{cartTotal}}</b></div>
+                            <div class="col text-right"><b>{{cartService.cartTotal}}</b></div>
                         </div>
-                        <button class="btn" (click)="savecart(getCart)" routerLink='/error'>Place order</button>
+
                         <p class="text-muted text-center">Complimentary Shipping & Returns</p>
                     </div>
                 </div>
@@ -111,7 +119,8 @@
                                     src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /> <img
                                     src="https://img.icons8.com/color/48/000000/maestro.png" /> </div>
                         </div>
-                        <form> <span>Cardholder's name:</span> <input placeholder="Nessie"> <span>Card Number:</span>
+                        <form> <span>Cardholder's name:</span> <input placeholder="Nessie"> <span>Card
+                                Number:</span>
                             <input placeholder="0125 6780 4567 9909">
                             <div class="row">
                                 <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
@@ -120,6 +129,7 @@
                         </form>
                     </div>
                 </div>
+
 
             </div>
         </div>

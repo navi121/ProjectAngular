@@ -20,6 +20,8 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { RouterModule } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { RouterModule } from '@angular/router';
     CheckoutComponent,
     ForgetpasswordComponent,
     ResetpasswordComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    NgxPaginationModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [UserService],
