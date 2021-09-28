@@ -49,10 +49,6 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  public SaveOrder() {
-
-  }
-
   public clear() {
     this.cartService.clearCart();
   }
@@ -74,6 +70,5 @@ export class CheckoutComponent implements OnInit {
     await this.cartService.SaveOrder(form.value).toPromise();
     this.router.navigateByUrl('error');
     this.cartService.orderItems=[];
-    this.resetForm(form);
   }
 }

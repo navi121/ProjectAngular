@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DashBoardService } from '../shared/dash-board.service';
 import { CartServiceService } from '../shared/cart-service.service';
 import { UserService } from '../shared/user.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-home-page',

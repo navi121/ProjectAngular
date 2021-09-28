@@ -41,17 +41,17 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     MyOrdersComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     FormsModule,
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    NgxPaginationModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [UserService],
-  exports: [RouterModule],
+  exports: [RouterModule,NgxPaginationModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

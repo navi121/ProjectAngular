@@ -13,7 +13,7 @@ describe('CartServiceService', () => {
       providers: [
         {
           provide: CartServiceService,
-          useValue: jasmine.createSpyObj<CartServiceService>('CartServiceService', ['addToCart','SaveCart','getItems','clearCart'])
+          useValue: jasmine.createSpyObj<CartServiceService>('CartServiceService', ['addToCart','SaveCart','getItems','clearCart','SaveOrder','placeOrder','plusProduct','minusProduct'])
         }
       ],
       imports: [FormsModule]
@@ -48,6 +48,24 @@ describe('CartServiceService', () => {
       expect(service.SaveCart).toHaveBeenCalledWith(testForm.value);
     });
 
+    it('should have called SaveOrder', () => {
+      const req = cartServiceMock.SaveOrder(testForm.value);
+      expect(service.SaveOrder).toHaveBeenCalledWith(testForm.value);
+    });
+
+    it('should have called SaveOrder', () => {
+      const req = cartServiceMock.placeOrder(testForm.value);
+      expect(service.placeOrder).toHaveBeenCalledWith(testForm.value);
+    });
+
+    it('should have called getCartDetails', () => {
+      expect(service.getCartDetails).toHaveBeenCalled;
+    });
+
+    it('should have called getOrderDetails', () => {
+      expect(service.getOrderDetails).toHaveBeenCalled;
+    });
+
     it('should have called getItems', () => {
       expect(service.getItems).toHaveBeenCalled;
     });
@@ -55,6 +73,17 @@ describe('CartServiceService', () => {
     it('should have called clearCart', () => {
       expect(service.clearCart).toHaveBeenCalled;
     });
+
+    it('should have called plusProduct', () => {
+      const req = cartServiceMock.plusProduct(testForm.value);
+      expect(service.plusProduct).toHaveBeenCalledWith(testForm.value);
+    });
+
+    it('should have called minusProduct', () => {
+      const req = cartServiceMock.minusProduct(testForm.value);
+      expect(service.minusProduct).toHaveBeenCalledWith(testForm.value);
+    });
+
   });
 
 });

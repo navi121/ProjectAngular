@@ -37,7 +37,6 @@ export class SignUpComponent implements OnInit {
     try {
       await this.userService.registerUser(form.value).toPromise();
       this.router.navigateByUrl('login');
-      this.resetForm(form);
     }
     catch (errorResponse) {
       if (errorResponse.status === 400) {

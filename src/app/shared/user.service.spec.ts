@@ -92,6 +92,7 @@ describe('UserService', () => {
     it('should get boolean value whether user is logged in or not if loggedin it should return true', () =>{
       expect(userServiceMock.isLoggedIn).toBeTruthy;
     })
+    
   });
 
 });

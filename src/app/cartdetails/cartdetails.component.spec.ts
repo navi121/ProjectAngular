@@ -21,7 +21,7 @@ describe('CartdetailsComponent', () => {
       providers:[
         {
           provide:CartServiceService,
-         useValue: jasmine.createSpyObj<CartServiceService>('CartServiceService', ['SaveCart','clearCart'])
+         useValue: jasmine.createSpyObj<CartServiceService>('CartServiceService', ['SaveCart','clearCart','minusProduct','plusProduct','getCartDetails','placeOrder'])
         }
        ],
        imports: [FormsModule]
@@ -34,6 +34,7 @@ describe('CartdetailsComponent', () => {
     component = fixture.componentInstance;
     cartServiceMock = TestBed.inject(CartServiceService) as jasmine.SpyObj<CartServiceService>;
     cartServiceMock.SaveCart.and.returnValue(of());
+    component.ngOnInit();
   });
   
   fdescribe('function Calls', () => {
@@ -55,9 +56,28 @@ describe('CartdetailsComponent', () => {
       expect(cartServiceMock.clearCart).toHaveBeenCalledTimes(1);
     });
 
-    it('should have called plus function', () => {
+    it('should have called SaveCart function', () => {
       const req=cartServiceMock.SaveCart(testForm.value);
       expect(cartServiceMock.SaveCart).toHaveBeenCalledWith(testForm.value);
+    });
+
+    it('should have called plus function', () => {
+      const req=cartServiceMock.plusProduct(testForm.value);
+      expect(cartServiceMock.plusProduct).toHaveBeenCalledWith(testForm.value);
+    });
+
+    it('should have called Minus function', () => {
+      const req=cartServiceMock.minusProduct(testForm.value);
+      expect(cartServiceMock.minusProduct).toHaveBeenCalledWith(testForm.value);
+    });
+
+    it('should have called getCartDetails function', () => {
+      expect(cartServiceMock.getCartDetails).toHaveBeenCalledTimes(1);
+    });
+
+    it('should have called PlaceOrder function', () => {
+      const req=cartServiceMock.placeOrder(testForm.value);
+      expect(cartServiceMock.placeOrder).toHaveBeenCalledWith(testForm.value);
     });
 
   })

@@ -2,6 +2,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
+import { CartServiceService } from '../shared/cart-service.service';
 import { DashBoardService } from '../shared/dash-board.service';
 import { Search } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
@@ -13,6 +14,7 @@ describe('NavbarComponent', () => {
   let fixture: ComponentFixture<NavbarComponent>;
   let userServiceMock: jasmine.SpyObj<UserService>;
   let dashBoardServiceMock: jasmine.SpyObj<DashBoardService>;
+  let cartServiceMock: jasmine.SpyObj<CartServiceService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,6 +23,10 @@ describe('NavbarComponent', () => {
         {
           provide: UserService,
           useValue: jasmine.createSpyObj<UserService>('UserService', ['logOut'])
+        },
+        {
+          provide: CartServiceService,
+          useValue: jasmine.createSpyObj<CartServiceService>('CartServiceService', ['clearBuyNow'])
         },
         {
           provide: DashBoardService,
@@ -37,6 +43,7 @@ describe('NavbarComponent', () => {
     component = fixture.componentInstance;
     userServiceMock = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
     dashBoardServiceMock = TestBed.inject(DashBoardService) as jasmine.SpyObj<DashBoardService>;
+    cartServiceMock = TestBed.inject(CartServiceService) as jasmine.SpyObj<CartServiceService>;
   });
 
   fdescribe('function Calls', () => {
@@ -57,6 +64,9 @@ describe('NavbarComponent', () => {
       const req=dashBoardServiceMock.searchProduct(searchText);
       expect(dashBoardServiceMock.searchProduct).toHaveBeenCalledWith(searchText);
     });
-
+    
+    it('should have called clearBuyNow()', () => {
+      expect(cartServiceMock.clearBuyNow).toHaveBeenCalled;
+    });
   })
 });
