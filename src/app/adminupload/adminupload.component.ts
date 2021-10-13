@@ -10,7 +10,7 @@ import { DashBoardService } from '../shared/dash-board.service';
 })
 export class AdminuploadComponent implements OnInit {
   public additem: AddItem;
-  public files: File;
+  public files: string[]=[];
   public constructor(private dashBoardService: DashBoardService) { }
 
   public ngOnInit(): void {
@@ -18,16 +18,19 @@ export class AdminuploadComponent implements OnInit {
   }
 
   public imgUpload(event: any) {
-    this.files = event.target.files[0];
+    this.files=event.target.files;
+    //  for (var i = 0; i < event.target.files.length; i++) { 
+    //  ;
+    //  }
   }
-  
+
   public resetForm(form?: NgForm) {
     if (form != null)
       form.reset;
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
-    this.additem=form.value;
+    this.additem = form.value;
     this.dashBoardService.addproduct(form.value)
       .subscribe((response: any) => {
         this.dashBoardService.uploadImages(response, this.files)

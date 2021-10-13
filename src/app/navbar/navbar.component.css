@@ -1,4 +1,37 @@
-div.example input[type=text] {
+div.d-flex button {
+  float: left;
+  width: 20%;
+  padding: 5px;
+  background: white;
+  color: black;
+  font-size: 17px;
+  border: 0px solid white;
+  border-left: none;
+  cursor: pointer;
+}
+
+div.d-flex button:hover {
+  background: #5da2db;
+}
+.navbar-brand{
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.2rem
+}
+.img1{      
+  height: 40px;      
+  width: 40px;           
+}  
+
+
+
+
+
+
+
+
+/* div.example input[type=text] {
     padding: 20px;
     font-size: 17px;
     border: 1px solid grey;
@@ -6,6 +39,11 @@ div.example input[type=text] {
     width: 80%;
     background: #f1f1f1;
   }
+
+  .img1{      
+    height: 50px;      
+    width: 50px;           
+}  
 
   div.d-flex button {
     float: left;
@@ -23,7 +61,6 @@ div.example input[type=text] {
     background: #5da2db;
   }
   
-  /* Clear floats */
   div.d-flex::after {
     content: "";
     clear: both;
@@ -66,4 +103,4 @@ div.example input[type=text] {
     width: 100%;
     padding: 10px;
     text-align: center;
-}
+} */

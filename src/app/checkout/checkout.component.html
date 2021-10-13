@@ -41,7 +41,7 @@
                                 <option value="CARD">CARD</option>
                             </select>
                         </div>
-                        <input type="submit" value="Place Order">
+                        <input type="submit" value="Place Order" (click)="clear()">
                     </form>
                     <br>
 
@@ -77,14 +77,14 @@
                                         <h6><b>Quantity:</b></h6>
                                     </div>
                                     <div class="col-2">
-                                        <button><i class="fa fa-plus" (click)="plus(getCart)"></i></button>
+                                        <button><i class="fa fa-minus" (click)="minus(getCart)"></i></button>                                        
                                     </div>
                                     <div class="col-2">
                                         <input type="text" style="width: 30px;height: 25px;" class="form-control"
                                             value={{getCart.quantity}} readonly>
                                     </div>
                                     <div class="col-2">
-                                        <button><i class="fa fa-minus" (click)="minus(getCart)"></i></button>
+                                        <button><i class="fa fa-plus" (click)="plus(getCart)"></i></button>
                                     </div>
 
                                 </div>

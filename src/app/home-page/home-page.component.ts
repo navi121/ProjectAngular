@@ -26,6 +26,10 @@ export class HomePageComponent implements OnInit {
     window.alert('product added');
   }
 
+  public addToDescription(product: CartItem){
+    this.cartService.addToDescription(product);
+  }
+
   public BuyNow(product: CartItem) {
     this.cartService.addToCart(product, this.size);
   }
@@ -36,4 +40,5 @@ export class HomePageComponent implements OnInit {
     this.dashBoard.getdetails();
     this.isLoggedIn$=this.userService.isLoggedIn;
   }
+
 }

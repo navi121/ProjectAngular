@@ -61,6 +61,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.minusProduct(getCart);
   }
 
+
   public savecart(getCart: CartItem) {
     this.cartService.SaveCart(getCart).toPromise();
   }

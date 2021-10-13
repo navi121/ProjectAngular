@@ -2,53 +2,31 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3" *ngFor="let product of dashBoard.list | paginate: { id: 'listing_pagination',
-    itemsPerPage: 4,
+    itemsPerPage: 8,
     currentPage: page,
     totalItems:  dashBoard.list.length}">
-      <div class="card mb-3" *ngIf="product">
+      <div class="card mb-3" (click)="addToDescription(product)" routerLink='/descrip' *ngIf="product">
         <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top">
         <div class="card-body"><span>
             <h3 class="card-text"><small class="text-muted">{{product.productName}}</small></h3>
-            <p class="card-title">Description:{{product.productDescription}}</p>
+            <a class="card-title" style="text-decoration: none;">Description:{{product.productDescription}}</a>
             <p class="card-price">Price : ₹{{product.price}}</p>
-            <form name="myForm">
-              <p class="card-size">Size :</p>
-              <div class="form-check form-check-inline pl-0" novalidate>
-                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
-                  value="S" required="required" checked />
-                <label class="form-check-label small text-uppercase card-link-secondary" for="small">S</label>
-              </div>
-              <div class="form-check form-check-inline pl-0">
-                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
-                  value="M" />
-                <label class="form-check-label small text-uppercase card-link-secondary" for="medium">M</label>
-              </div>
-              <div class="form-check form-check-inline pl-0">
-                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
-                  value="L" />
-                <label class="form-check-label small text-uppercase card-link-secondary" for="large">L</label>
-              </div>
-            </form>
-            <div class="buyNow" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
-              <div class="sub class" *ngIf="Loginstatus">
-                <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
-                  Cart</button>
-                <button type="button" class="btn btn-success" routerLink='/login'>Buy
-                  Now</button>
-              </div>
-            </div>
-            <div class="buyNow" *ngIf="(isLoggedIn$ | async) as Loginstatus">
-              <div class="sub class" *ngIf="Loginstatus">
-                <button type="button" type="submit" class="btn btn-info" (click)="addToCart(product)">Add to
-                  Cart</button>
-                <button type="button" class="btn btn-success" (click)="BuyNow(product)" routerLink='/checkout'>Buy
-                  Now</button>
-              </div>
-            </div>
+
           </span>
+          <div class="product-rating">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+            <span>4.5</span>
+          </div>
         </div>
+
       </div>
+
     </div>
+
   </div>
 </div>
 <div class="col text-center">

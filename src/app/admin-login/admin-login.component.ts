@@ -31,8 +31,8 @@ export class AdminLoginComponent implements OnInit {
       this.router.navigateByUrl('addproduct');
       this.resetForm(form);
     }
-    catch (errorResponse) {
-      if (errorResponse.status === 401) {
+    catch (errorMessage) {
+      if (errorMessage.status === 401 || errorMessage.status === 400) {
         this.errorMessage = true;
       }
     }

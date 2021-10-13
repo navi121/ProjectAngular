@@ -22,6 +22,8 @@ export class AddItem{
     quantity: string;
     total: string;
     category:string;
+    image1: string;
+    image2: string;
 }
 export class CartItem{
     productName: string;
@@ -31,6 +33,8 @@ export class CartItem{
     quantity: string;
     total: string;
     image: string;
+    image1: string;
+    image2: string;
 }
 export class Reset{
     Email: string;

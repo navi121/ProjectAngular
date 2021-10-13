@@ -15,7 +15,8 @@ export class CartServiceService {
   orderDetail: PlaceOrder[] = [];
   cartDetail: CartItem[] = [];
   public cartItems: any = [];
-  cartTotal: number
+  cartTotal: number;
+  productDes: CartItem[] = [];
 
   readonly rootUrl = 'http://localhost:50278';
   public constructor(private http: HttpClient, public userService: UserService) { }
@@ -29,6 +30,11 @@ export class CartServiceService {
       this.items.push(product);
       this.buyItem.push(product);
     }
+  }
+
+  public addToDescription(product: CartItem){
+    this.productDes=[];
+    this.productDes.push(product);
   }
 
   public placeOrder(product: CartItem) {
@@ -67,7 +73,9 @@ export class CartServiceService {
       price: product.price,
       total: product.total,
       quantity: product.quantity,
-      image: product.image
+      image: product.image,
+      image1: product.image1,
+      image2: product.image2
     }
     return this.http.post(this.rootUrl + '/AddCartDetails/' + this.userService.userDisplayName, body);
   }

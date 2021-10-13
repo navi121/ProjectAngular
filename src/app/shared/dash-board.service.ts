@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class DashBoardService {
   list: AddItem[];
+  imgList: AddItem[];
 
   readonly rootUrl = 'http://localhost:50278';
   public constructor(private http: HttpClient) { }
@@ -21,14 +22,19 @@ export class DashBoardService {
       image: additem.image,
       quantity: additem.quantity,
       total: additem.total,
-      category: additem.category
+      category: additem.category,
+      image1:additem.image1,
+      image2: additem.image2
     }
     return this.http.post(this.rootUrl + '/AddProduct', body);
   }
 
-  public uploadImages(id: Int32List, files: string | Blob) {
+  public uploadImages(id: Int32List, files: any) {
     const formData = new FormData();
-    formData.append("files", files);
+    
+     for (var i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+     }
     return this.http.post(this.rootUrl + '/UploadImage/' + id, formData);
   }
 
@@ -43,5 +49,5 @@ export class DashBoardService {
   public searchCategory(category: string) {
     this.http.get(this.rootUrl + '/DivideCategory/' + category).toPromise().then(res => this.list = res as AddItem[]);
   }
-  
+
 }

@@ -28,5 +28,13 @@
 input {
   margin: .4rem;
 }
+.product-rating {
+  color: #ffc107;
+}
+
+.product-rating span {
+  font-weight: 600;
+  color: #252525;
+}
 
  

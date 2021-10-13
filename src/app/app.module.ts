@@ -22,6 +22,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     ForgetpasswordComponent,
     ResetpasswordComponent,
     AdminLoginComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    ProductDetailsComponent
   ],
   imports: [
     NgxPaginationModule,
