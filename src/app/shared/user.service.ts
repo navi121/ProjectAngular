@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddItem, User, UserLog, CartItem, Reset, Pass, Admin, Img } from './user.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
+import { DashBoardService } from './dash-board.service';
 @Injectable()
 
 export class UserService {
   public userDisplayName: string | null;
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public header: any;
 
   public get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
-  readonly rootUrl = 'http://localhost:50278';
+  readonly rootUrl = 'http://localhost:50280';
   constructor(private http: HttpClient,
-    private router: Router) { }
+    private router: Router,private dashboard: DashBoardService) { }
 
   public loginUser(login: UserLog): Observable<any> {
     this.loggedIn.next(true);
@@ -26,11 +29,13 @@ export class UserService {
       Password: login.Password,
       Email: login.Email,
     }
-    return this.http.post(this.rootUrl + '/UserLogin', body);
+    return this.http.post(this.rootUrl + '/UserLogin', body,{responseType: 'text'});
   }
 
   public logOut() {
     this.loggedIn.next(false);
+    localStorage.removeItem('token');
+    this.dashboard.list=[];
     this.router.navigateByUrl('/login');
   }
 

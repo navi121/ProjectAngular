@@ -3,107 +3,22 @@
 <div class="card" *ngFor="let getCart of cartService.productDes;">
     <div class="row">
 
-            <div class="slider">
-                <div class="product" >
-                    <a (click)="pic1()"><img src="{{'data:image/jpg;base64,' + getCart.image2}}" id="imagebox" alt=""></a><br>
-                    <a (click)="pic2()"><img src="{{'data:image/jpg;base64,' + getCart.image1}}" id="imagebox" alt=""></a><br>
-                    <a (click)="pic3()"><img src="{{'data:image/jpg;base64,' + getCart.image}}" id="imagebox" alt=""></a>
-
-                    
-
-                </div>
-                <div class="preview">
-                    <img src="{{'data:image/jpg;base64,' + getCart.image2}}" alt="" *ngIf="Pic1">
-                    <img src="{{'data:image/jpg;base64,' + getCart.image1}}" alt="" *ngIf="Pic2">
-                    <img src="{{'data:image/jpg;base64,' + getCart.image}}" alt="" *ngIf="Pic3">
-                </div>
+        <div class="slider">
+            <div class="product">
+                <a (click)="pic1()"><img src="{{'data:image/jpg;base64,' + getCart.image2}}" id="imagebox"
+                        alt=""></a><br>
+                <a (click)="pic2()"><img src="{{'data:image/jpg;base64,' + getCart.image1}}" id="imagebox"
+                        alt=""></a><br>
+                <a (click)="pic3()"><img src="{{'data:image/jpg;base64,' + getCart.image}}" id="imagebox" alt=""></a>
+            </div>
+            <div class="preview">
+                <img src="{{'data:image/jpg;base64,' + getCart.image2}}" alt="" *ngIf="Pic1">
+                <img src="{{'data:image/jpg;base64,' + getCart.image1}}" alt="" *ngIf="Pic2">
+                <img src="{{'data:image/jpg;base64,' + getCart.image}}" alt="" *ngIf="Pic3">
+            </div>
 
         </div>
     </div>
-
-
-
-
-
-
-
-
-    <!-- <div class='col-12'>
-        <ngb-carousel>
-            <ng-template ngbSlide>
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                <img class="img" src="{{'data:image/jpg;base64,' + getCart.image2}}" alt="FirstSlide"
-                    style="height:500px;width:70%">
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </ng-template>
-            <ng-template ngbSlide>
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                <img class="img" src="{{'data:image/jpg;base64,' + getCart.image1}}" style="height:500px;width:70%">
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </ng-template>
-            <ng-template ngbSlide>
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                <img class="img" src="{{'data:image/jpg;base64,' + getCart.image}}" alt="ThirdSlide"
-                    style="height:500px;width:70%">
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </ng-template>            
-        </ngb-carousel>
-    </div> -->
-    <!-- <div class="movable-area-position">
-        <div id="carousel">
-            <figure>
-                <img style="width: 100%;" src="{{'data:image/jpg;base64,' + getCart.image2}}" alt="">
-                <img style="width: 100%;"  src="{{'data:image/jpg;base64,' + getCart.image1}}" alt="">
-                <img style="width: 100%;"  src="{{'data:image/jpg;base64,' + getCart.image}}" alt="">
-            </figure>
-        </div>
-    </div> -->
-     <!-- <div class="row">
-            <div class="col-2">
-                <img class="mainImg" src="{{'data:image/jpg;base64,' + getCart.image2}}" width="100%" id="pic-2">
-                <img class="mainImg" src="{{'data:image/jpg;base64,' + getCart.image1}}" width="100%" id="pic-2">
-                <img class="mainImg" src="{{'data:image/jpg;base64,' + getCart.image}}" width="100%" id="pic-3"> 
-                <div class="small-img-row">
-                    <div class="small-img-col">
-                        <img data-target="#pic-1" data-toggle="tab" src = "{{'data:image/jpg;base64,' + getCart.image1}}" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src = "{{'data:image/jpg;base64,' + getCart.image}}" width="100%" class="small-img">
-                    </div>
-                </div>
-            </div>
-
-        </div>  -->
-
-
-
-    <!-- <div class="product-imgs">
-            <div class="img-display">
-                <div class="img-showcase">
-                    <img src="{{'data:image/jpg;base64,' + getCart.image}}" alt="shoe image">
-                </div>
-            </div>
-        </div> -->
-    <!-- <div class = "product-imgs">
-            < <div class = "img-display">
-              <div class = "img-showcase">
-                <img src = "{{'data:image/jpg;base64,' + getCart.image1}}" alt = "shoe image">
-                <img src = "{{'data:image/jpg;base64,' + getCart.image2}}" alt = "shoe image">
-              </div>
-            </div> 
-            <div class = "img-select">
-              <div class = "img-item">
-                <a href = "#" data-id = "1">
-                  <img src = "{{'data:image/jpg;base64,' + getCart.image1}}" width="100%">
-                </a>
-              </div>
-              <div class = "img-item">
-                <a href = "#" data-id = "2">
-                  <img src = "{{'data:image/jpg;base64,' + getCart.image2}}" width="100%">
-                </a>
-              </div>
-            </div>
-        </div> -->
     <div class="product-content">
         <h4 class="product-title">{{getCart.productName}}</h4>
         <div class="product-rating">
@@ -153,7 +68,7 @@
                             class="fa fa-minus"></i></button>
                 </div>
                 <div class="form-check-inline">
-                    <input type="text" class="form-control" value={{getCart.quantity}} readonly>
+                    <input type="number"  min = "1" value="{{getCart.quantity}}" readonly>
                 </div>
                 <div class="form-check-inline">
                     <button class="btnQ" (click)="plus(getCart)" style="color: white;"><i
@@ -166,7 +81,7 @@
                         aria-hidden="true"></i></button>
                 <div class="form-check-inline">
                     Total Price
-                    <input type="text" class="form-control" [(ngModel)]="cartService.cartTotal" style="width: 80px;"
+                    <input type="text" class="form-control" [(ngModel)]="getCart.total" style="width: 80px;"
                         readonly>
                 </div>
             </div>
@@ -174,24 +89,26 @@
         <div class="purchase-info" *ngIf="(isLoggedIn$ | async) as Loginstatus">
             <div class="sub class" *ngIf="Loginstatus">
                 <div class="form-check-inline">
-                    <button type="button" class="btnQ" (click)="minus(getCart)"><i class="fa fa-minus"></i></button>
+                    <button type="button" class="btnQ" (click)="minus(getCart)" style="color: white;"><i class="fa fa-minus"></i></button>
                 </div>
                 <div class="form-check-inline">
                     <input type="text" class="form-control" value={{getCart.quantity}} readonly>
                 </div>
                 <div class="form-check-inline">
-                    <button class="btnQ" (click)="plus(getCart)"><i class="fa fa-plus"></i></button>
+                    <button class="btnQ" (click)="plus(getCart)" style="color: white;"><i class="fa fa-plus"></i></button>
                 </div><br>
                 <button type="button" class="btn" (click)="addToCart(getCart)">
                     Add to Cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
                 </button>
-                <button type="button" class="btn" (click)="BuyNow(getCart)" routerLink='/checkout'>Buy Now</button>
+                <button type="button" class="btn" (click)="BuyNow(getCart)" routerLink='/checkout'>Buy Now <i class="fa fa-money"
+                    aria-hidden="true"></i></button>
                 <div class="form-check-inline">
                     Total Price
-                    <input type="text" class="form-control" [(ngModel)]="cartService.cartTotal" style="width: 80px;"
+                    <input type="text" class="form-control" [(ngModel)]="getCart.total" style="width: 80px;"
                         readonly>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<app-home-page [carousel]="carousel1"></app-home-page>

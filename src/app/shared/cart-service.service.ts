@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CartItem, PlaceOrder } from './user.model';
 import { UserService } from './user.service';
 import { concat } from 'rxjs';
@@ -18,7 +18,7 @@ export class CartServiceService {
   cartTotal: number;
   productDes: CartItem[] = [];
 
-  readonly rootUrl = 'http://localhost:50278';
+  readonly rootUrl = 'http://localhost:50280';
   public constructor(private http: HttpClient, public userService: UserService) { }
 
   public addToCart(product: CartItem, size: string) {
@@ -26,6 +26,15 @@ export class CartServiceService {
       window.alert('product already added');
     }
     else {
+      this.cartItems.push({
+        productName: product.productName,
+        qty: 1,
+        price: product.price
+      })
+      this.cartTotal = 0;
+      this.cartItems.forEach((item: any) => {
+        this.cartTotal += (item.qty * item.price)
+      })
       product.size = size;
       this.items.push(product);
       this.buyItem.push(product);
@@ -75,17 +84,33 @@ export class CartServiceService {
       quantity: product.quantity,
       image: product.image,
       image1: product.image1,
-      image2: product.image2
+      image2: product.image2,
+      category: product.category
     }
     return this.http.post(this.rootUrl + '/AddCartDetails/' + this.userService.userDisplayName, body);
   }
 
   public getCartDetails() {
-    this.http.get(this.rootUrl + '/GetCartDetails/' + this.userService.userDisplayName).toPromise().then(res => this.cartDetail = res as CartItem[]);
+    var authToken=localStorage.getItem('token');
+    if(authToken===null){
+      this.http.get(this.rootUrl + '/GetCartDetails/' + this.userService.userDisplayName).toPromise().then(res => this.cartDetail = res as CartItem[]);
+    }
+    else{
+      var headers_object = new HttpHeaders().set("Authorization", "Bearer " + authToken);
+      this.http.get(this.rootUrl + '/GetCartDetails/' + this.userService.userDisplayName,{ headers: headers_object }).toPromise().then(res => this.cartDetail = res as CartItem[]);
+    }    
   }
 
   public getOrderDetails() {
-    this.http.get(this.rootUrl + '/GetOrderDetail/' + this.userService.userDisplayName).toPromise().then(res => this.orderDetail = res as PlaceOrder[]);
+    var authToken=localStorage.getItem('token');
+    if(authToken === null){
+      this.http.get(this.rootUrl + '/GetOrderDetail/' + this.userService.userDisplayName).toPromise().then(res => this.orderDetail = res as PlaceOrder[]);
+    }
+    else{
+      var headers_object = new HttpHeaders().set("Authorization", "Bearer " + authToken);
+      this.http.get(this.rootUrl + '/GetOrderDetail/' + this.userService.userDisplayName,{ headers: headers_object }).toPromise().then(res => this.orderDetail = res as PlaceOrder[]);
+    }
+   
   }
 
   public getItems() {
@@ -115,7 +140,7 @@ export class CartServiceService {
       qty: 1,
       price: getCart.price
     })
-    this.cartTotal = 0
+    this.cartTotal = 0;
     this.cartItems.forEach((item: any) => {
       this.cartTotal += (item.qty * item.price)
     })

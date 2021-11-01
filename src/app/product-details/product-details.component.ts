@@ -15,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   public Pic1:boolean=true;
   public Pic2:boolean=false;
   public Pic3:boolean=false;
+  public carousel1:boolean=false;
 
   constructor(public cartService: CartServiceService,public userService: UserService) { }
 

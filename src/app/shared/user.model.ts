@@ -35,6 +35,7 @@ export class CartItem{
     image: string;
     image1: string;
     image2: string;
+    category:string;
 }
 export class Reset{
     Email: string;
