@@ -5,19 +5,30 @@ import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  selector: 'app-myprofile',
+  templateUrl: './myprofile.component.html',
+  styleUrls: ['./myprofile.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class MyprofileComponent implements OnInit {
+  public edit: boolean = false;
   public user: User;
-  public errorMessage: boolean = false;
-  public constructor(private userService: UserService,
-    public readonly router: Router) { }
 
-  public ngOnInit(): void {
+  constructor(public userService: UserService,private rootUrl: Router) { }
+
+  ngOnInit(): void {
+    this.userService.getUser();
     this.resetForm();
   }
+
+  onChange(event: any) {
+    if (event.target.value == "EDIT") {
+      this.edit = true;
+    }
+    else {
+      this.edit = false;
+    }
+  }
+
   public resetForm(form?: NgForm) {
     if (form != null)
       form.reset;
@@ -35,14 +46,7 @@ export class SignUpComponent implements OnInit {
 
   public async OnSubmit(form: NgForm): Promise<void> {
     this.user = form.value;
-    try {
-      await this.userService.registerUser(form.value).toPromise();
-      this.router.navigateByUrl('login');
+    this.userService.updateUser(form.value).toPromise();
+    this.edit = false;
     }
-    catch (errorResponse) {
-      if (errorResponse.status === 400) {
-        this.errorMessage = true;
-      }
-    }
-  }
 }

@@ -14,6 +14,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 const routes: Routes = [
   {path:'loggedUser', component:SignUpComponent},
   {path:'home', component:HomePageComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:'navbar',component:NavbarComponent},
   {path:'order',component:MyOrdersComponent},
   {path:'descrip',component:ProductDetailsComponent},
+  {path:'profile', component:MyprofileComponent},
   {path:'',redirectTo:'/login',pathMatch:'full'}
 ];
 

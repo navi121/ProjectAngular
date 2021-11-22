@@ -11,19 +11,19 @@
     <form method="post" class="col s12 white" #userRegistrationForm="ngForm"
       (ngSubmit)="OnSubmit(userRegistrationForm)">
       <div class="txt_field">
-        <input class="validate" type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName" required
+        <input class="validate" type="text" name="firstName" #FirstName="ngModel" [(ngModel)]="user.firstName" required
           minlength="3">
         <span></span>
         <label>FirstName</label>
       </div>
       <div class="txt_field">
-        <input class="validate" type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName" required
+        <input class="validate" type="text" name="lastName" #LastName="ngModel" [(ngModel)]="user.lastName" required
           minlength="1">
         <span></span>
         <label>LastName</label>
       </div>
       <div class="txt_field">
-        <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email"
+        <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.email"
           pattern="^[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{3}$" required>
           <div *ngIf="Email.invalid && (Email.dirty || Email.touched)"
         class="alert">
@@ -38,7 +38,7 @@
       </div>
       <div class="txt_field">
         <input type="password" class="validate" type="password" name="Password" #Password="ngModel"
-          [(ngModel)]="user.Password" required minlength="3">
+          [(ngModel)]="user.password" required minlength="3">
         <span></span>
         <div *ngIf="Password.invalid && (Password.dirty || Password.touched)"
         class="alert">
@@ -52,7 +52,7 @@
         <label>Password</label>
       </div>
       <div class="txt_field">
-        <input class="validate" type="text" name="MobileNumber" #MobileNumber="ngModel" [(ngModel)]="user.MobileNumber"
+        <input class="validate" type="text" name="MobileNumber" #MobileNumber="ngModel" [(ngModel)]="user.mobileNumber"
           required minlength="10" maxlength="10" pattern="[0-9 ]*">
         <span></span>
         <div *ngIf="MobileNumber.invalid && (MobileNumber.dirty || MobileNumber.touched)"
@@ -69,13 +69,13 @@
       </div>
         <label>MobileNumber</label>
       </div>
-      <select class="form-select" aria-label="Default select example" name="SecurityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="user.SecurityQuestion">
+      <select class="form-select" aria-label="Default select example" name="SecurityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="user.securityQuestion">
         <option value="Which City You Have Born?">Which City You Have Born?</option>
          <option value="What is your First Mobile?">What is your First Mobile?</option>
          <option value="What is Your First Pet Name?">What is Your First Pet Name?</option>
        </select>
        <div class="txt_field">
-         <input class="validate" type="text" name="SecurityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="user.SecurityAnswer"
+         <input class="validate" type="text" name="SecurityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="user.securityAnswer"
            required minlength="3">
          <span></span>
          <label>Type Your Answer : Remember your Answer</label>

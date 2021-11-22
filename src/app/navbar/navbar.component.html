@@ -43,7 +43,7 @@
           <a class="nav-link active dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
             aria-expanded="false" ngbDropdownToggle *ngIf="Loginstatus">Hi {{userService.userDisplayName}}</a>
           <div ngbDropdownMenu class="dropdown-menu ">
-            <button class="dropdown-item" *ngIf="Loginstatus">MyProfile</button>
+            <button class="dropdown-item" *ngIf="Loginstatus" routerLink="/profile">MyProfile</button>
             <button class="dropdown-item" routerLink="/order" *ngIf="Loginstatus">MyOrders</button>
             <button class="dropdown-item" (click)="logOut()" *ngIf="Loginstatus">Logout</button>
 

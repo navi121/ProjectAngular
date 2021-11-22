@@ -1,18 +1,19 @@
-import { Image } from "angular-responsive-carousel";
-
 export class User {
-    MobileNumber: string;
-    Password: string;
-    Email: string;
-    FirstName: string;
-    LastName: string;
-    SecurityAnswer: string;
-    SecurityQuestion: string;
+    mobileNumber: string;
+    password: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    securityAnswer: string;
+    securityQuestion: string;
+    userId: string;
 }
+
 export class UserLog {
     Password: string;
     Email: string;
 }
+
 export class AddItem{
     productName: string;
     productDescription: string;

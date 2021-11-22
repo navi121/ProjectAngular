@@ -23,6 +23,11 @@ import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ResetpasswordComponent,
     AdminLoginComponent,
     MyOrdersComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    MyprofileComponent
   ],
   imports: [
     NgxPaginationModule,
@@ -50,7 +56,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [UserService],
   exports: [RouterModule,NgxPaginationModule],

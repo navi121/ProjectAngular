@@ -1,0 +1,147 @@
+body {
+    background-color: #f9f9fa
+}
+
+.padding {
+    padding: 3rem !important
+}
+
+.bg-c-lite-green {
+    background: rgb(12, 40, 60);
+    border-radius: 3%;
+}
+
+.user-profile {
+    padding: 20px 0
+}
+
+.card-block {
+    padding: 1.25rem
+}
+
+.edit {
+    margin-left: 80%;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(12, 40, 60);
+}
+
+.save{
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(12, 40, 60);
+}
+
+.save:hover{
+    background-color: rgb(12, 40, 60);
+    color: white;
+}
+
+.edit:hover {
+    background-color: rgb(12, 40, 60);
+    color: white;
+}
+
+.m-b-25 {
+    margin-bottom: 25px
+}
+
+.img-radius {
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+h6 {
+    font-size: 14px
+}
+
+.card .card-block p {
+    line-height: 25px
+}
+
+@media only screen and (min-width: 1400px) {
+    p {
+        font-size: 14px
+    }
+}
+
+.card-block {
+    padding: 1.25rem
+}
+
+.b-b-default {
+    border-bottom: 1px solid #e0e0e0
+}
+
+.m-b-20 {
+    margin-bottom: 20px
+}
+
+.m-b-10 {
+    margin-bottom: 10px
+}
+
+.m-t-40 {
+    margin-top: 20px;
+    font-weight: 600
+}
+
+/******************************  BUTTON  ************************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
+body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background:#fff;
+}
+span{
+  position: relative;
+  display: inline-flex;
+  width: 180px;
+  height: 55px;
+  margin: 0 15px;
+  perspective: 1000px;
+}
+span a{
+  font-size: 19px;
+  letter-spacing: 1px;
+  transform-style: preserve-3d;
+  transform: translateZ(-25px);
+  transition: transform .25s;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+span a:before,
+span a:after{
+  position: absolute;
+  content: "CHANGE PASSWORD";
+  content-visibility: 10%;
+  height: 55px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid black;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+span a:before{
+  color: #fff;
+  background: #000;
+  transform: rotateY(0deg) translateZ(25px);
+}
+span a:after{
+  color: #000;
+  transform: rotateX(90deg) translateZ(25px);
+}
+span a:hover{
+  transform: translateZ(-25px) rotateX(-90deg);
+}

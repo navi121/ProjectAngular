@@ -12,6 +12,7 @@ export class UserService {
   public userDisplayName: string | null;
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public header: any;
+  user: User[];
 
   public get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -30,6 +31,12 @@ export class UserService {
       Email: login.Email,
     }
     return this.http.post(this.rootUrl + '/UserLogin', body,{responseType: 'text'});
+  }
+
+  public checkAuthorization(){
+    if(localStorage.getItem('token') === null){
+      this.router.navigateByUrl('login');
+    }
   }
 
   public logOut() {
@@ -59,15 +66,30 @@ export class UserService {
 
   public registerUser(user: User) {
     const body: User = {
-      MobileNumber: user.MobileNumber,
-      Password: user.Password,
-      Email: user.Email,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
-      SecurityAnswer: user.SecurityAnswer,
-      SecurityQuestion: user.SecurityQuestion
+      mobileNumber: user.mobileNumber,
+      password: user.password,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      securityAnswer: user.securityAnswer,
+      securityQuestion: user.securityQuestion,
+      userId: user.userId
     }
     return this.http.post(this.rootUrl + '/AddUser', body);
+  }
+
+  public updateUser(user: User){
+    const body: User = {
+      mobileNumber: user.mobileNumber,
+      password: user.password,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      securityAnswer: user.securityAnswer,
+      securityQuestion: user.securityQuestion,
+      userId: user.userId
+    }
+    return this.http.post(this.rootUrl + '/UserUpdate', body);
   }
 
   public adminLogin(admin: Admin): Observable<any> {
@@ -76,5 +98,9 @@ export class UserService {
       Email: admin.Email
     }
     return this.http.post(this.rootUrl + '/AdminUserLogin', body);
+  }
+
+  public getUser() {
+    this.http.get(this.rootUrl + '/GetUserDetail/' + this.userDisplayName).toPromise().then(res => this.user = res as User[]);
   }
 }
