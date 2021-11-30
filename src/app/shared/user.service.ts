@@ -46,7 +46,7 @@ export class UserService {
     this.router.navigateByUrl('/login');
   }
 
-  public resetUser(reset: Reset): Observable<any> {
+  public resetUser(reset: Reset) {
     const body: Reset = {
       Email: reset.Email
     }
@@ -97,7 +97,7 @@ export class UserService {
       Password: admin.Password,
       Email: admin.Email
     }
-    return this.http.post(this.rootUrl + '/AdminUserLogin', body);
+    return this.http.post(this.rootUrl + '/AdminUserLogin', body,{responseType: 'text'});
   }
 
   public getUser() {

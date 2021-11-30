@@ -7,8 +7,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class DashBoardService {
-  list: AddItem[];
-  imgList: AddItem[];
+  public list: AddItem[];
+  public imgList: AddItem[];
+  public productBackup: AddItem[];
 
   readonly rootUrl = 'http://localhost:50280';
   public constructor(private http: HttpClient) { }
@@ -55,7 +56,7 @@ export class DashBoardService {
     }
     else {
       var headers_object = new HttpHeaders().set("Authorization", "Bearer " + authToken);
-      this.http.get(this.rootUrl + '/GetProductsDetails', { headers: headers_object }).toPromise().then(res => this.list = res as AddItem[]);
+      this.http.get(this.rootUrl + '/GetProductsDetails', { headers: headers_object }).toPromise().then(res => this.list = res as AddItem[]).then(res => this.productBackup = res as AddItem[]);
     }
   }
 

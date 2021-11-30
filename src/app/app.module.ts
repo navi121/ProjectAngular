@@ -24,11 +24,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment.prod';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,8 +55,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     NgbModule,
     MDBBootstrapModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    NgxsModule.forRoot([]),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [UserService],
   exports: [RouterModule,NgxPaginationModule],

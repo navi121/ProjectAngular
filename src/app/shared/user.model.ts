@@ -72,3 +72,8 @@ export class PlaceOrder{
     quantity: string;
     total: string;
 }
+
+export class Filter{
+    static readonly type = '[Price] Filter Price';
+    constructor(public price: string) {}
+}

@@ -2,7 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ErrormessageComponent } from '../errormessage/errormessage.component';
 import { DashBoardService } from '../shared/dash-board.service';
 import { UserLog } from '../shared/user.model';
@@ -29,10 +29,33 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit(): void {
     this.resetForm();
+
+    
+    var number = this.getNumber();
+    var  sub= this.getNumber2();
+    var p = this.getNumber3().then(x=>{
+
+    });
+
+    // some logic
+
+  }
+
+  public getNumber():number{
+    return 10;
+  }
+
+  public getNumber2():Observable<number>{
+    return of(10).pipe();
+  }
+
+  public getNumber3():Promise<number>{
+    return Promise.resolve(10);
   }
 
   public onclick() {
     localStorage.removeItem('token');
+
     //this.dashBoardService.headers_object=new HttpHeaders().delete("Authorization", "Bearer ");;
   }
 
@@ -48,9 +71,9 @@ export class LoginComponent implements OnInit {
   public async OnSubmit(form: NgForm): Promise<void> {
     this.login = form.value;
     try {
-      await this.userService.loginUser(form.value).subscribe((responseType: 'text') => {
-        console.log(responseType);
-        localStorage.setItem('token', responseType);
+      await this.userService.loginUser(form.value).subscribe((getToken: 'text') => {
+        console.log(getToken);
+        localStorage.setItem('token', getToken);
         this.router.navigateByUrl('home');
       });
 

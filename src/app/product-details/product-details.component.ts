@@ -63,6 +63,4 @@ export class ProductDetailsComponent implements OnInit {
   public BuyNow(product: CartItem) {
     this.cartService.addToCart(product, this.size);
   }
-
-
 }
