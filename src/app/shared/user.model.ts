@@ -77,3 +77,16 @@ export class Filter{
     static readonly type = '[Price] Filter Price';
     constructor(public price: string) {}
 }
+
+export interface Price{
+    productName: string;
+    productDescription: string;
+    price: string;
+    size: string;
+    image: string;
+    quantity: string;
+    total: string;
+    category:string;
+    image1: string;
+    image2: string;
+}

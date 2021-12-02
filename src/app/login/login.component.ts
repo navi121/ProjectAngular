@@ -2,11 +2,13 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ErrormessageComponent } from '../errormessage/errormessage.component';
 import { DashBoardService } from '../shared/dash-board.service';
 import { UserLog } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
+import { AddProduct } from '../store/actions/price-action';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
   public saveToken: string;
 
   public constructor(private userService: UserService, private dashBoardService: DashBoardService,
-    public readonly router: Router) { }
+    public readonly router: Router,private store: Store) { }
 
   public ngOnInit(): void {
     this.resetForm();
@@ -75,6 +77,7 @@ export class LoginComponent implements OnInit {
         console.log(getToken);
         localStorage.setItem('token', getToken);
         this.router.navigateByUrl('home');
+        this.store.dispatch(new AddProduct(this.dashBoardService.list));
       });
 
     }

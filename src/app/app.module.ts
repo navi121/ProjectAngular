@@ -27,6 +27,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment.prod';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { Price_State } from './store/state/price-state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
     HttpClientModule,
     NgbModule,
     MDBBootstrapModule.forRoot(),
-    NgxsModule.forRoot([]),
+    NgxsModule.forRoot([Price_State]),
     NgxsLoggerPluginModule.forRoot()
   ],
   providers: [UserService],
