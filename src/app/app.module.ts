@@ -28,6 +28,8 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment.prod';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { Price_State } from './store/state/price-state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,8 @@ import { Price_State } from './store/state/price-state';
     NgbModule,
     MDBBootstrapModule.forRoot(),
     NgxsModule.forRoot([Price_State]),
-    NgxsLoggerPluginModule.forRoot()
+    NgxsLoggerPluginModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [UserService],
   exports: [RouterModule,NgxPaginationModule],

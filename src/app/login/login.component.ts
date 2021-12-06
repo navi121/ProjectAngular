@@ -77,14 +77,15 @@ export class LoginComponent implements OnInit {
         console.log(getToken);
         localStorage.setItem('token', getToken);
         this.router.navigateByUrl('home');
-        this.store.dispatch(new AddProduct(this.dashBoardService.list));
       });
-
+      var a=0;
     }
+    
     catch (errorMessage) {
       if (errorMessage.status === 401 || errorMessage.status === 400) {
         this.errorMessage = true;
       }
     }
+    
   }
 }

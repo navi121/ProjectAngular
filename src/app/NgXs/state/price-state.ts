@@ -20,7 +20,7 @@ export class PriceModel {
 
 
 @Injectable({
-    providedIn: 'root' // just before your class
+    providedIn: 'root'
 })
 
 export class Price_State {
@@ -62,26 +62,6 @@ export class Price_State {
         return;
     }   
 }
-
-/* @Injectable()
-export class Price_State implements NgxsOnInit {
-    @Select((state: { priceList: any; }) => state.priceList) price$: Observable<any>;
-
-    public constructor(public dashboard: DashBoardService,
-        private store: Store, public priceAction: PriceAction) { }
-
-    public addProduct(){
-        this.store.dispatch(new ActionPrice.AddProduct(this.dashboard.list));
-    }
-    
-
-
-    ngxsOnInit(ctx?: StateContext<any>) {
-        //ctx.dispatch(new AddProduct(this.dashboard.list));
-    }
-
-    
-} */
 
 export class PriceState {}
 

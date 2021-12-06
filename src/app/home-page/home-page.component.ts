@@ -6,12 +6,14 @@ import { CartServiceService } from '../shared/cart-service.service';
 import { UserService } from '../shared/user.service';
 import { Select, Store } from '@ngxs/store';
 import { Price_State } from '../store/state/price-state';
+import { AddProduct } from '../store/actions/price-action';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
+
 export class HomePageComponent implements OnInit {
   public size: string = "S";
   public page: number = 1;
@@ -25,6 +27,7 @@ export class HomePageComponent implements OnInit {
   public filterList: AddItem[] = [];
   public n: number;
   public productBackup: [];
+  public count: number=0;
   /********************************************** */
 
   public changeSize(event: any) {
@@ -59,11 +62,15 @@ export class HomePageComponent implements OnInit {
 
   public filterPrice(event: any) {
     this.filterNumber = event.target.value;
+    if(this.count == 0){
+      this.store.dispatch(new AddProduct(this.dashBoard.list));
+      this.count++;
+    }
     this.Filter(this.filterNumber);
   }
 
   public constructor(public dashBoard: DashBoardService, public cartService: CartServiceService,
-    public userService: UserService, private store: Store, private priceState: Price_State) { }
+    public userService: UserService, private store: Store) { }
 
   public ngOnInit(): void {
     this.dashBoard.getdetails();

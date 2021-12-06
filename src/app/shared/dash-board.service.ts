@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AddItem } from './user.model';
+import { Store } from '@ngxs/store';
+import { AddProduct } from '../store/actions/price-action';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class DashBoardService {
 
   readonly rootUrl = 'http://localhost:50280';
   n: number;
-  public constructor(private http: HttpClient) { }
+  public constructor(private http: HttpClient,private store: Store) { }
 
   public headers = new HttpHeaders({ 'content-type': 'application/x-www-form-urlencoded' });
 
@@ -58,7 +60,12 @@ export class DashBoardService {
     else {
       var headers_object = new HttpHeaders().set("Authorization", "Bearer " + authToken);
       this.http.get(this.rootUrl + '/GetProductsDetails', { headers: headers_object }).toPromise().then(res => this.list = res as AddItem[]);
+      //this.store.dispatch(new AddProduct());
     }
+  }
+
+  public dispatchList(){
+    this.store.dispatch(new AddProduct(this.list));
   }
 
   public searchProduct(searchText: string) {
@@ -68,5 +75,5 @@ export class DashBoardService {
   public searchCategory(category: string) {
     this.http.get(this.rootUrl + '/DivideCategory/' + category).toPromise().then(res => this.list = res as AddItem[]);
   }
-  
+
 }
