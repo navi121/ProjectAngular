@@ -8,7 +8,7 @@ import { ErrormessageComponent } from '../errormessage/errormessage.component';
 import { DashBoardService } from '../shared/dash-board.service';
 import { UserLog } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-import { AddProduct } from '../store/actions/price-action';
+import { AddProduct } from '../NgXs/actions/price-action';
 
 @Component({
   selector: 'app-login',
@@ -31,34 +31,10 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit(): void {
     this.resetForm();
-
-    
-    var number = this.getNumber();
-    var  sub= this.getNumber2();
-    var p = this.getNumber3().then(x=>{
-
-    });
-
-    // some logic
-
-  }
-
-  public getNumber():number{
-    return 10;
-  }
-
-  public getNumber2():Observable<number>{
-    return of(10).pipe();
-  }
-
-  public getNumber3():Promise<number>{
-    return Promise.resolve(10);
   }
 
   public onclick() {
     localStorage.removeItem('token');
-
-    //this.dashBoardService.headers_object=new HttpHeaders().delete("Authorization", "Bearer ");;
   }
 
   public resetForm(form?: NgForm) {
@@ -78,7 +54,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', getToken);
         this.router.navigateByUrl('home');
       });
-      var a=0;
     }
     
     catch (errorMessage) {

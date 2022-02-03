@@ -17,13 +17,15 @@ export class CartServiceService {
   public cartItems: any = [];
   cartTotal: number;
   productDes: CartItem[] = [];
+  public productAdded: boolean=true;
 
-  readonly rootUrl = 'http://localhost:50280';
+  readonly rootUrl = 'http://stuffkartproject-dev.us-east-1.elasticbeanstalk.com';
   public constructor(private http: HttpClient, public userService: UserService) { }
 
   public addToCart(product: CartItem, size: string) {
     if (this.items.find(x => x.productName == product.productName)) {
       window.alert('product already added');
+      this.productAdded=false;
     }
     else {
       this.cartItems.push({
@@ -38,6 +40,7 @@ export class CartServiceService {
       product.size = size;
       this.items.push(product);
       this.buyItem.push(product);
+      this.productAdded = true;
     }
   }
 
@@ -113,6 +116,30 @@ export class CartServiceService {
    
   }
 
+  public deleteCart(product: CartItem){
+    const body: CartItem = {
+      productName: product.productName,
+      productDescription: product.productDescription,
+      size: product.size,
+      price: product.price,
+      total: product.total,
+      quantity: product.quantity,
+      image: product.image,
+      image1: product.image1,
+      image2: product.image2,
+      category: product.category
+    }
+    this.RemoveElementFromArray(product.productName)
+    this.minusProduct(product);
+    return this.http.post(this.rootUrl + '/DeleteProducts/'+ this.userService.userDisplayName, body);
+  }
+
+  public RemoveElementFromArray(element : string){
+    this.items.forEach((value,index)=>{
+      if(value.productName==element) this.items.splice(index,1);
+    });
+  }
+  
   public getItems() {
     return this.items;
   }

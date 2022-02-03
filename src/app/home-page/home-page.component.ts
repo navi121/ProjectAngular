@@ -5,8 +5,8 @@ import { DashBoardService } from '../shared/dash-board.service';
 import { CartServiceService } from '../shared/cart-service.service';
 import { UserService } from '../shared/user.service';
 import { Select, Store } from '@ngxs/store';
-import { Price_State } from '../store/state/price-state';
-import { AddProduct } from '../store/actions/price-action';
+import { Price_State } from '../NgXs/state/price-state';
+import { AddProduct } from '../NgXs/actions/price-action';
 
 @Component({
   selector: 'app-home-page',

@@ -11,29 +11,6 @@
       <th>Quantity Price</th>
     </tr>
     <tbody>
-      <tr class="cart-item" *ngFor="let getCart of cartService.items; let i=index">
-        <td>{{getCart.productName}}</td>
-        <td>{{getCart.productDescription}}</td>
-        <td>{{getCart.price}}</td>
-        <td>{{getCart.size}}</td>
-        <div class="form-check-inline">
-          <button class="btn btn-primary" id={{i}} (click)="plus(getCart)"><i class="fa fa-plus"></i></button>
-        </div>
-        <div class="form-check-inline">
-          <input type="text" class="form-control" value={{getCart.quantity}} readonly>
-        </div>
-        <div class="form-check-inline">
-          <button class="btn btn-primary" id={{i}} (click)="minus(getCart)"><i class="fa fa-minus"></i></button>
-        </div>
-        <td>
-          <div class="form-check-inline">
-            <input type="text" class="form-control" value={{getCart.total}} readonly>
-          </div>
-        </td>
-        <td>
-          <button class="btn btn-primary" (click)="savecart(getCart)">Save</button>
-        </td>
-      </tr>
       <tr class="cart-item" *ngFor="let getCart of cartService.cartDetail; let i=index">
         <td>{{getCart.productName}}</td>
         <td>{{getCart.productDescription}}</td>
@@ -53,8 +30,9 @@
             <input type="text" class="form-control" value={{getCart.total}} readonly>
           </div>
         </td>
+        <button class="btn btn-danger" (click)="clear(getCart)" style="color: black;">Delete</button>
       </tr>
-      <button class="btn btn-danger" (click)="clear()">Clear Cart</button>
+      
     </tbody>
   </table>
 </div>

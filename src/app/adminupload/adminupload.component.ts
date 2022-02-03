@@ -19,9 +19,6 @@ export class AdminuploadComponent implements OnInit {
 
   public imgUpload(event: any) {
     this.files=event.target.files;
-    //  for (var i = 0; i < event.target.files.length; i++) { 
-    //  ;
-    //  }
   }
 
   public resetForm(form?: NgForm) {

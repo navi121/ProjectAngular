@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AddItem } from './user.model';
 import { Store } from '@ngxs/store';
-import { AddProduct } from '../store/actions/price-action';
+import { AddProduct } from '../NgXs/actions/price-action';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DashBoardService {
   public productBackup: AddItem[];
   public filterList: AddItem[] = [];
 
-  readonly rootUrl = 'http://localhost:50280';
+  readonly rootUrl = 'http://stuffkartproject-dev.us-east-1.elasticbeanstalk.com';
   n: number;
   public constructor(private http: HttpClient,private store: Store) { }
 

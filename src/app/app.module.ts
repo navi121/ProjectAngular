@@ -27,7 +27,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment.prod';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { Price_State } from './store/state/price-state';
+import { Price_State } from './NgXs/state/price-state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({

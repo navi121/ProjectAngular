@@ -20,8 +20,10 @@ export class CartdetailsComponent implements OnInit {
     
   }
 
-  public clear() {
-    this.cartService.clearCart();
+  public clear(getCart: CartItem) {
+    this.cartService.deleteCart(getCart).toPromise();
+    this.cartService.getCartDetails();
+    this.cartService.getCartDetails();
   }
 
   plus(getCart: CartItem) {

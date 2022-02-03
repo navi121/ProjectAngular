@@ -18,7 +18,7 @@ export class UserService {
     return this.loggedIn.asObservable();
   }
 
-  readonly rootUrl = 'http://localhost:50280';
+  readonly rootUrl = 'http://stuffkartproject-dev.us-east-1.elasticbeanstalk.com';
   constructor(private http: HttpClient,
     private router: Router,private dashboard: DashBoardService) { }
 
