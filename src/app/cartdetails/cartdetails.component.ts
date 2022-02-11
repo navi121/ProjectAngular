@@ -34,6 +34,10 @@ export class CartdetailsComponent implements OnInit {
    this.cartService.minusProduct(getCart);
   }
 
+  public savetolocal(){
+    this.cartService.items = this.cartService.cartDetail;
+  }
+
   public BuyNow(getCart: CartItem) {
     this.cartService.placeOrder(getCart);
   }

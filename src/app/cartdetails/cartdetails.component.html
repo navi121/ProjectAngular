@@ -39,7 +39,7 @@
 <div class="form-check-inline" style="margin-left: 930px;">
   Total Price
   <input type="text" class="form-control" [(ngModel)]="cartService.cartTotal" readonly>
-  <button class="btn btn-success" routerLink="/checkout">Place Order</button>
+  <button class="btn btn-success" (click)="savetolocal()" routerLink="/checkout" >Place Order</button>
 </div>
 <div class="subtotal cf">
   <ul>

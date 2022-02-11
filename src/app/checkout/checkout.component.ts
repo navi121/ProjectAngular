@@ -64,11 +64,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   public savecart(getCart: CartItem) {
+    
     this.cartService.SaveCart(getCart).toPromise();
   }
 
   public async OnSubmit(form: NgForm): Promise<void> {
     this.order = form.value;
+    this.cartService.buyItem=this.cartService.cartDetail;
     await this.cartService.SaveOrder(form.value).toPromise();
     this.router.navigateByUrl('error');
     this.cartService.orderItems=[];

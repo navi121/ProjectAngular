@@ -23,7 +23,7 @@
         <label>LastName</label>
       </div>
       <div class="txt_field">
-        <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.email"
+        <input class="validate" type="text" name="email" #Email="ngModel" [(ngModel)]="user.email"
           pattern="^[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{3}$" required>
           <div *ngIf="Email.invalid && (Email.dirty || Email.touched)"
         class="alert">
@@ -37,7 +37,7 @@
         <label>Email</label>
       </div>
       <div class="txt_field">
-        <input type="password" class="validate" type="password" name="Password" #Password="ngModel"
+        <input type="password" class="validate" type="password" name="password" #Password="ngModel"
           [(ngModel)]="user.password" required minlength="3">
         <span></span>
         <div *ngIf="Password.invalid && (Password.dirty || Password.touched)"
@@ -52,7 +52,7 @@
         <label>Password</label>
       </div>
       <div class="txt_field">
-        <input class="validate" type="text" name="MobileNumber" #MobileNumber="ngModel" [(ngModel)]="user.mobileNumber"
+        <input class="validate" type="text" name="mobileNumber" #MobileNumber="ngModel" [(ngModel)]="user.mobileNumber"
           required minlength="10" maxlength="10" pattern="[0-9 ]*">
         <span></span>
         <div *ngIf="MobileNumber.invalid && (MobileNumber.dirty || MobileNumber.touched)"
@@ -69,13 +69,13 @@
       </div>
         <label>MobileNumber</label>
       </div>
-      <select class="form-select" aria-label="Default select example" name="SecurityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="user.securityQuestion">
+      <select class="form-select" aria-label="Default select example" name="securityQuestion" #SecurityQuestion="ngModel" [(ngModel)]="user.securityQuestion">
         <option value="Which City You Have Born?">Which City You Have Born?</option>
          <option value="What is your First Mobile?">What is your First Mobile?</option>
          <option value="What is Your First Pet Name?">What is Your First Pet Name?</option>
        </select>
        <div class="txt_field">
-         <input class="validate" type="text" name="SecurityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="user.securityAnswer"
+         <input class="validate" type="text" name="securityAnswer" #SecurityAnswer="ngModel" [(ngModel)]="user.securityAnswer"
            required minlength="3">
          <span></span>
          <label>Type Your Answer : Remember your Answer</label>

@@ -23,6 +23,7 @@ export class CartServiceService {
   public constructor(private http: HttpClient, public userService: UserService) { }
 
   public addToCart(product: CartItem, size: string) {
+    this.items=this.cartDetail; 
     if (this.items.find(x => x.productName == product.productName)) {
       window.alert('product already added');
       this.productAdded=false;
@@ -55,9 +56,9 @@ export class CartServiceService {
 
   public SaveOrder(order: PlaceOrder) {
     this.n = 0;
-    while (this.n < this.items.length) {
+    while (this.n < this.buyItem.length) {
       let neworder = new PlaceOrder();
-      var arr = this.items[this.n];
+      var arr = this.buyItem[this.n];
       neworder.productName = arr.productName;
       neworder.productDescription = arr.productDescription;
       neworder.quantity = arr.quantity;
@@ -73,7 +74,7 @@ export class CartServiceService {
       this.orderItems.push(neworder);
       this.n++;
     };
-
+    this.buyItem=[];
     return this.http.post(this.rootUrl + '/PlaceOrder/' + this.userService.userDisplayName, this.orderItems);
   }
 
@@ -101,7 +102,8 @@ export class CartServiceService {
     else{
       var headers_object = new HttpHeaders().set("Authorization", "Bearer " + authToken);
       this.http.get(this.rootUrl + '/GetCartDetails/' + this.userService.userDisplayName,{ headers: headers_object }).toPromise().then(res => this.cartDetail = res as CartItem[]);
-    }    
+    }
+       
   }
 
   public getOrderDetails() {
