@@ -1,0 +1,114 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="card" *ngFor="let getCart of cartService.productDes;">
+    <div class="row">
+
+        <div class="slider">
+            <div class="product">
+                <a (click)="pic1()"><img src="{{'data:image/jpg;base64,' + getCart.image2}}" id="imagebox"
+                        alt=""></a><br>
+                <a (click)="pic2()"><img src="{{'data:image/jpg;base64,' + getCart.image1}}" id="imagebox"
+                        alt=""></a><br>
+                <a (click)="pic3()"><img src="{{'data:image/jpg;base64,' + getCart.image}}" id="imagebox" alt=""></a>
+            </div>
+            <div class="preview">
+                <img src="{{'data:image/jpg;base64,' + getCart.image2}}" alt="" *ngIf="Pic1">
+                <img src="{{'data:image/jpg;base64,' + getCart.image1}}" alt="" *ngIf="Pic2">
+                <img src="{{'data:image/jpg;base64,' + getCart.image}}" alt="" *ngIf="Pic3">
+            </div>
+
+        </div>
+    </div>
+    <div class="product-content">
+        <h4 class="product-title">{{getCart.productName}}</h4>
+        <div class="product-rating">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+            <span>4.5</span>
+        </div>
+
+        <div class="product-price">
+            <p class="new-price">Price: <span>₹{{getCart.price}}</span></p>
+        </div>
+
+        <form name="myForm">
+            Size :
+            <div class="form-check form-check-inline pl-0" novalidate>
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                    value="S" required="required" checked />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="small">S</label>
+            </div>
+            <div class="form-check form-check-inline pl-0">
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                    value="M" />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="medium">M</label>
+            </div>
+            <div class="form-check form-check-inline pl-0">
+                <input type="radio" class="form-check-input" name="materialExampleRadios" (change)="changeSize($event)"
+                    value="L" />
+                <label class="form-check-label small text-uppercase card-link-secondary" for="large">L</label>
+            </div>
+        </form><br>
+
+        <div class="product-detail">
+            <h2>{{getCart.productDescription}}</h2>
+            <ul>
+                <li>Available: <span>in stock</span></li>
+                <li>Shipping Area: <span>All over India</span></li>
+                <li>Shipping Fee: <span>Free</span></li>
+            </ul>
+        </div>
+        <div class="purchase-info" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+            <div class="sub class" *ngIf="Loginstatus">
+                <div class="form-check-inline">
+                    <button type="button" class="btnQ" (click)="minus(getCart)" style="color: white;"><i
+                            class="fa fa-minus"></i></button>
+                </div>
+                <div class="form-check-inline">
+                    <input type="number" min="1" value="{{getCart.quantity}}" readonly>
+                </div>
+                <div class="form-check-inline">
+                    <button class="btnQ" (click)="plus(getCart)" style="color: white;"><i
+                            class="fa fa-plus"></i></button>
+                </div><br>
+                <button type="button" class="btn" routerLink='/login'>
+                    Add to Cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn" routerLink='/login'>Buy Now <i class="fa fa-money"
+                        aria-hidden="true"></i></button>
+                <div class="form-check-inline">
+                    Total Price
+                    <input type="text" class="form-control" [(ngModel)]="getCart.total" style="width: 80px;" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="purchase-info" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+            <div class="sub class" *ngIf="Loginstatus">
+                <div class="form-check-inline">
+                    <button type="button" class="btnQ" (click)="minus(getCart)" style="color: white;"><i
+                            class="fa fa-minus"></i></button>
+                </div>
+                <div class="form-check-inline">
+                    <input type="text" class="form-control" value={{getCart.quantity}} readonly>
+                </div>
+                <div class="form-check-inline">
+                    <button class="btnQ" (click)="plus(getCart)" style="color: white;"><i
+                            class="fa fa-plus"></i></button>
+                </div><br>
+                <button type="button" class="btn" (click)="addToCart(getCart)">
+                    Add to Cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn" (click)="BuyNow(getCart)" routerLink='/checkout'>Buy Now <i
+                        class="fa fa-money" aria-hidden="true"></i></button>
+                <div class="form-check-inline">
+                    Total Price
+                    <input type="text" class="form-control" [(ngModel)]="getCart.total" style="width: 80px;" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-home-page [carousel]="carousel1"></app-home-page>

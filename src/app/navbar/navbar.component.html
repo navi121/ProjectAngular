@@ -1,0 +1,166 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(12,40,60);">
+  <div class="container-fluid">
+    <div class="imgdiv">
+      <img src="https://raw.githubusercontent.com/navi121/dummy/main/STUFFKART%20(3).png" class="img1" alt="STUFFKART">
+      <a class="navbar-brand" routerLink="/home" style="font-size: 15px;">STUFFKART</a>
+
+    </div>
+
+    <div class="d-flex input-group w-auto">
+      <input type="search" class="form-control" [(ngModel)]="searchText" placeholder="Search">
+      <button type="submit" (click)="search()"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home" aria-current="page" href="../home/home.component.html">HOME</a>
+        </li>
+        <div ngbDropdown class="nav-item dropdown ">
+          <a class="btn dropdown-toggle" style="color: white;" ngbDropdownToggle>
+            CATEGORIES
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu ">
+            <button class="dropdown-item" (click)="searchMen()">Mens</button>
+            <button class="dropdown-item" (click)="searchWomen()">Womens</button>
+            <button class="dropdown-item" (click)="searchKid()">Kids</button>
+            <a class="dropdown-item"></a>
+          </div>
+        </div>
+        <li *ngIf="(isLoggedIn$ | async) as Loginstatus" class="nav-item">
+          <a routerLink="/cart" class="nav-link active" *ngIf="Loginstatus">CART</a>
+        </li>
+        <li *ngIf="!(isLoggedIn$ | async) as Loginstatus" class="nav-item">
+          <a routerLink="/login" class="nav-link active" *ngIf="Loginstatus">LOGIN</a>
+        </li>
+        <div ngbDropdown class="nav-item dropdown" *ngIf="(isLoggedIn$ | async) as Loginstatus" class="nav-item">
+          <a class="nav-link active dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+            aria-expanded="false" ngbDropdownToggle *ngIf="Loginstatus">Hi {{userService.userDisplayName}}</a>
+          <div ngbDropdownMenu class="dropdown-menu ">
+            <button class="dropdown-item" *ngIf="Loginstatus" routerLink="/profile">MyProfile</button>
+            <button class="dropdown-item" routerLink="/order" *ngIf="Loginstatus">MyOrders</button>
+            <button class="dropdown-item" (click)="logOut()" *ngIf="Loginstatus">Logout</button>
+
+          </div>
+        </div>
+
+
+        <li *ngIf="!(isLoggedIn$ | async) as Loginstatus" class="nav-item">
+          <a routerLink="/signup" *ngIf="Loginstatus" class="nav-link active">SIGN-UP</a>
+        </li>
+
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <link rel="stylesheet" href="../navbar/navbar.component.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid" style="background-color: rgba(136, 133, 133, 0.281);">
+    <div class="imgdiv">
+      <img src="https://raw.githubusercontent.com/navi121/dummy/main/STUFFKART%20(1).png" class="img1" alt="STUFFKART" >
+      STUFFKART
+    </div>
+    <div class="d-flex input-group w-auto">
+      <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search">
+      <button type="submit" (click)="search()"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link active" routerLink="/home" style="color: rgb(116, 116, 7);" (click)="clear()">HOME</a>
+    </div>
+    <div ngbDropdown class="nav-item dropdown ">
+      <a class="btn dropdown-toggle" style="color: #0d6efd;" ngbDropdownToggle>
+        CATEGORIES
+      </a>
+      <div ngbDropdownMenu class="dropdown-menu ">
+        <button class="dropdown-item" (click)="searchMen()">Mens</button>
+        <button class="dropdown-item" (click)="searchWomen()">Womens</button>
+        <button class="dropdown-item" (click)="searchKid()">Kids</button>
+        <a class="dropdown-item"></a>
+      </div>
+    </div>
+    <div class="nav-item" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+      <a class="nav-link" *ngIf="Loginstatus" routerLink="/login">LOGIN</a>
+    </div>
+    <div class="nav-item" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+      <a class="nav-link" *ngIf="Loginstatus" routerLink="/signup">SIGN-UP</a>
+    </div>
+    <div class="navbar-nav nav-right" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+      <div class="nav-item" *ngIf="Loginstatus">
+        <a class="nav-link" routerLink="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> CART</a>
+      </div>
+    </div>
+    <div class="navbar-nav nav-right" *ngIf="!(isLoggedIn$ | async) as Loginstatus">
+      <div class="nav-item" *ngIf="Loginstatus">
+        <a class="nav-link" routerLink="/login"><i class="fa fa-shopping-cart" aria-hidden="true"></i> CART</a>
+      </div>
+    </div>
+    <div class="dropdown" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+      <div class="username" *ngIf="Loginstatus">Hi: {{userService.userDisplayName}}</div>
+      <div class="dropdown-content" *ngIf="(isLoggedIn$ | async) as Loginstatus">
+        <a class="nav-link" routerLink="/order" *ngIf="Loginstatus">My Order</a>
+        <a class="nav-link" (click)="logOut()" routerLink="/login" *ngIf="Loginstatus">LOGOUT</a>
+      </div>
+    </div>
+  </div>
+</nav> -->

@@ -1,0 +1,129 @@
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center" *ngFor="let user of userService.user">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+                    <div class="m-b-25"> <img src="https://raw.githubusercontent.com/navi121/naveen/master/logo.jpg"
+                            class="img-radius" alt="User-Profile-Image"> </div>
+                    <h6 class="name">Naveen N</h6>
+                    <p>Buyer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+            </div>
+            <div class="col-sm-8" *ngIf="!edit">
+                <button class="edit" (click)="onChange($event)" value="EDIT">Edit</button>
+                <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default">Information</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10">FirstName</p>
+                            <h6 class="text-muted f-w-400">{{user.firstName}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10">LastName</p>
+                            <h6 class="text-muted f-w-400">{{user.lastName}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10">Email</p>
+                            <h6 class="text-muted f-w-400">{{user.email}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10">Phone</p>
+                            <h6 class="text-muted f-w-400">{{user.mobileNumber}}</h6>
+                        </div>
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default">Security</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10">Password</p>
+                            <h6 class="text-muted f-w-400">*******</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10">Security Question</p>
+                            <h6 class="text-muted f-w-400">{{user.securityQuestion}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10">Security Answer</p>
+                            <h6 class="text-muted f-w-400">{{user.securityAnswer}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <form method="post" class="col-lg-8" #userRegistrationForm="ngForm"
+            (ngSubmit)="OnSubmit(userRegistrationForm)">
+                <div class="col-sm-10" *ngIf="edit">
+                    <button class="edit">Cancel</button>
+                    <button type="submit" class="save">Save</button>
+                    <div class="card-block">
+                        <h6 class="m-b-20 p-b-5 b-b-default ">Information</h6>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="m-b-10 ">FirstName</p>
+                                <input class="validate" type="text" name="firstName" #firstName="ngModel"
+                                    [(ngModel)]="user.firstName" required minlength="3" placeholder="Naveen">
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10">LastName</p>
+                                <input class="validate" type="text" name="lastName" #lastName="ngModel"
+                                    [(ngModel)]="user.lastName" required minlength="1" placeholder="N">
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10">Email</p>
+                                <input class="validate" type="text" name="email" #email="ngModel"
+                                    [(ngModel)]="user.email" pattern="^[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{3}$" required
+                                    placeholder="naveenchpt@gmail.com">
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                                    <div *ngIf="email.errors?.required" class="text-danger">
+                                        Email is required.
+                                    </div>
+                                    <div *ngIf="email.errors?.pattern" class="text-danger">
+                                        email Invalid.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10">Phone</p>
+                                <input class="validate" type="text" name="mobileNumber" #mobileNumber="ngModel"
+                                    [(ngModel)]="user.mobileNumber" required minlength="10" maxlength="10"
+                                    pattern="[0-9 ]*">
+                                <div *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched)"
+                                    class="alert">
+                                    <div *ngIf="mobileNumber.errors?.required" class="text-danger">
+                                        mobileNumber is required.
+                                    </div>
+                                    <div *ngIf="mobileNumber.errors?.pattern" class="text-danger">
+                                        mobileNumber Must be Number.
+                                    </div>
+                                    <div *ngIf="mobileNumber.errors?.minlength" class="text-danger">
+                                        mobileNumber Should be 10 Numbers
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default">Security</h6>
+                        <div class="row">                            
+                            <div class="col-sm-6">
+                                <p class="m-b-10">Security Question</p>
+                                <select class="form-select" aria-label="Default select example" name="securityQuestion"
+                                    #securityQuestion="ngModel" [(ngModel)]="user.securityQuestion">
+                                    <option value="Which City You Have Born?">Which City You Have Born?</option>
+                                    <option value="What is your First Mobile?">What is your First Mobile?</option>
+                                    <option value="What is Your First Pet Name?">What is Your First Pet Name?</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10">Security Answer</p>
+                                <input class="validate" type="text" name="securityAnswer" #securityAnswer="ngModel"
+                                    [(ngModel)]="user.securityAnswer" required minlength="3">
+                            </div>
+                             
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-dark" routerLink="/pass" style="margin-left: 28%;">Change Password</button>
+            </form>
+            
+            <!-- <span><a routerLink='/pass'></a></span> -->
+        </div>
+    </div>
+</div>

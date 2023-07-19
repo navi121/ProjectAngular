@@ -1,0 +1,73 @@
+
+ 
+<div class='col-12'>
+  <ngb-carousel *ngIf="carousel">
+    <ng-template ngbSlide>
+      <img
+        src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2021/10/13/bb05efe0-e319-4acb-974d-9fe4d0abe8851634139203981-Work-Wear_Desk.jpg"
+        alt="FirstSlide" style="height:300px;width:100%">
+
+    </ng-template>
+    <ng-template ngbSlide>
+      <img
+        src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2021/10/13/e93499c5-270b-4151-9acd-11fbbf5cc6b11634139203927-Men---s-Top-Wear_Desk.jpg"
+        style="height:300px;width:100%">
+
+    </ng-template>
+    <ng-template ngbSlide>
+      <img src="
+          https://i.pinimg.com/originals/6c/52/58/6c52584568600f7c77f91f49be6ea1b4.jpg" alt="ThirdSlide"
+        style="height:300px;width:100%">
+
+    </ng-template>
+    <ng-template ngbSlide>
+      <img
+        src="https://images-na.ssl-images-amazon.com/images/S/stores-image-uploads-eu-prod/5/AmazonStores/A21TJRUUN4KGV/eac2b1bd4e89149486b7350a76af59c6.w3000.h770.jpg"
+        style="height:300px;width:100%">
+
+    </ng-template>
+
+  </ngb-carousel>
+</div><br>
+
+<link rel="stylesheet" href="../home-page/home-page.component.css">
+
+<div class="container">
+  Filter-By-Price<input class="am" id="rangeInput" type="range" min="300" max="10000" oninput="amount.value=rangeInput.value" />
+  <input class="am" id="amount" type="number" value="300" min="300" max="10000"
+    oninput="rangeInput.value=amount.value" (change)="filterPrice($event)"/><br>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of dashBoard.list | paginate: { id: 'listing_pagination',
+    itemsPerPage: 8,
+    currentPage: page,
+    totalItems:  dashBoard.list.length}">
+
+      <div class="card mb-3" (click)="addToDescription(product)" routerLink='/descrip' *ngIf="product">
+        <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top">
+
+        <div class="card-body"><span>
+            <h3 class="card-text"><small class="text-muted">{{product.productName}}</small></h3>
+            <a class="card-title" style="text-decoration: none;">Description:{{product.productDescription}}</a>
+            <p class="card-price">Price : ₹{{product.price}}</p>
+
+          </span>
+          <div class="product-rating">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+            <span>4.5</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="col text-center">
+  <pagination-controls id="listing_pagination" direction="true" (pageChange)="page = $event">
+  </pagination-controls>
+</div>
